@@ -1,0 +1,87 @@
+﻿@model SaremChap.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "صفحه ورودی | چاپ صارم";
+}
+
+<div class="init-page"></div>
+<div class="call-action call-action-boxed call-action-style2 clearfix">
+    <div class="container" style="text-align:right; margin-top:30px;margin-bottom:30px">
+
+        <div class="row">
+            <div class="col-md-8">
+                <img  src="~/Images/WallImages/pageimages/Logo.png" style="padding:100px 50px 50px 50px"/>
+            </div>
+            <div class="col-md-4 call-action call-action-boxed call-action-style3 clearfix">
+                <section id="loginForm">
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <h4 style="color:#ffffff">ورود به چاپ صارم <i class="fa fa-unlock "></i></h4>
+                        <hr />
+                        @Html.ValidationSummary(true)
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control text-right", placeholder ="نام کاربری"})
+                                @Html.ValidationMessageFor(m => m.UserName)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control text-right", placeholder = "رمز عبور" })
+                                @Html.ValidationMessageFor(m => m.Password)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <div class="checkbox">
+                                    @Html.LabelFor(m => m.RememberMe)
+
+
+                                    @Html.CheckBoxFor(m => m.RememberMe)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="  ورود  " class="btn-system border-btn btn-medium btn-wite" />
+                            </div>
+                        </div>
+                        <p>
+                           اگر هنوز ثبت نام نکرده اید از <a href="/Account/Register">اینجا</a> اقدام کنید.
+                        </p>
+                    }
+                </section>
+                @*<section id="socialLoginForm">
+                        @Html.Partial("_ExternalLoginsListPartial", new { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
+                    </section>*@
+            </div>
+
+
+
+        </div>
+
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+@section TagMeta{
+
+
+    چاپ صارم چاپ روی انواع سطوح
+
+
+
+}
+
+@section ContentMeta{
+
+    چاپ صارم چاپ روی انواع سطوح
+
+}
+
+@section AuthorMeta{
+    گروه صنعتی چاپ صارم ارائه دهنده خدمات نوین چاپ
+}

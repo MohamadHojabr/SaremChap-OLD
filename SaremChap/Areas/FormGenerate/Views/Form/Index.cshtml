@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Domainclasses.Modes.Form>
+
+@{
+    ViewBag.Title = "لیست فرم";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<a class="jq-btn" data-url="/FormGenerate/Form/create" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">ایجاد فرم + </a> |
+<table class="table table-striped" style="direction:rtl">
+    <tr>
+        <td>کد</td>
+        <td>عنوان فرم</td>
+        <td>مربوط به محصول</td>
+        <td>عملیات</td>
+        <td></td>
+    </tr>
+
+    @foreach (var form in Model)
+    {
+        <tr>
+            <td>@form.Id</td>
+            <td>@form.Fa_Title</td>
+            <td>@form.Product.name</td>
+            <td>
+                <a href="/FormGenerate/Field/Fieldlist/@form.Id">تعریف فیلد</a>
+                  |  
+                <a href="/FormGenerate/ShowForm/ShowForm/@form.Id">مشاهده فرم</a>
+            </td>
+            <td>
+                <a class="jq-btn" data-url="/FormGenerate/Form/Edit/@form.Id" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">اصلاح</a> |
+                <a class="jq-btn" data-url="/FormGenerate/Form/Details/@form.Id" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">جزئیات</a> |
+                <a class="jq-btn" data-url="/FormGenerate/Form/Delete/@form.Id" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">حذف</a>
+            </td>
+        </tr>
+    }
+</table>

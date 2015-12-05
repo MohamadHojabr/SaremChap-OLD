@@ -1,0 +1,43 @@
+﻿@model Domainclasses.Modes.Value
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Value</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Field.TitleEn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Field.TitleEn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Form.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Form.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Val)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Val)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

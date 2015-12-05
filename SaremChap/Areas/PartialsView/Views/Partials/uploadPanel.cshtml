@@ -1,0 +1,38 @@
+﻿
+<div class="call-action call-action-boxed call-action-style2 clearfix text-right">
+    <a href="" class="btn-system btn-mini border-btn">بستن</a>
+
+
+    <div class="jumbotron">
+        <form action="~/Home/SaveUploadedFile" method="post" enctype="multipart/form-data" class="dropzone" id="dropzoneForm" style="width: 50px; background: none; border: none;">
+            <div class="fallback">
+                <input name="file" type="file" multiple />
+                <input type="submit" value="Upload" />
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    //File Upload response from the server
+    Dropzone.options.dropzoneForm = {
+        init: function () {
+            this.on("complete", function (data) {
+                var res = eval('(' + data.xhr.responseText + ')');
+                alert(res)
+                //var res = JSON.parse(data.xhr.responseText);
+            });
+        }
+    };
+</script>
+
+<style>
+    #dropZone {
+        background: gray;
+        border: black dashed 3px;
+        width: 200px;
+        height:100px;
+        padding: 20px;
+        text-align: center;
+        color: white;
+    }
+</style>

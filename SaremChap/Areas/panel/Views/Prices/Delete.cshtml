@@ -1,0 +1,15 @@
+﻿@model Domainclasses.Modes.Price
+
+<div class="call-action call-action-boxed call-action-style2 clearfix text-right">
+    <h3> آیا از حذف این قیمت دارید؟</h3>
+    <br />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value=" حذف " class="btn-system btn-large" />
+
+        </div>
+    }
+</div>

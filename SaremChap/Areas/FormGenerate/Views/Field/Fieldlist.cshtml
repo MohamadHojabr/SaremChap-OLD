@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Domainclasses.Modes.Field>
+
+@{
+    var str = "";
+    ViewBag.Title = "لیست فیلد های فرم" + str;
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="text-right">فهرست فیلد های این فرم</h2>
+
+<p>
+    <a class="jq-btn" data-url="/FormGenerate/field/create" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">  ایجاد فیلد جدید  +  </a>
+</p>
+<table class="table table-striped" style="direction:rtl">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Form.Fa_Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TitleEn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TitleFa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequiredField)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DisabledField)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EffectivePrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Options)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Finance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FieldType)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        str = item.Form.Fa_Title;
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Form.Fa_Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TitleEn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TitleFa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequiredField)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DisabledField)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EffectivePrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Options)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Finance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FieldType)
+            </td>
+            <td>
+                <a class="jq-btn" data-url="/FormGenerate/field/Edit/@item.Id" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">اصلاح</a> |
+                <a class="jq-btn" data-url="/FormGenerate/field/Details/@item.Id" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">جزئیات</a> |
+                <a class="jq-btn" data-url="/FormGenerate/field/Delete/@item.Id" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">حذف</a>
+            </td>
+        </tr>
+    }
+
+</table>

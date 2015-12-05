@@ -1,0 +1,101 @@
+﻿@model PagedList.IPagedList<Domainclasses.Modes.Order>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "لیست سفارشات";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="init-page"></div>
+<h2 class="text-right">لیست سفارشات</h2>
+<br />
+
+<div class="row">
+    <div class="col-md-6">
+@using (Html.BeginForm("OrderList", "ShowForm", FormMethod.Get, new { @class = "form-inline" }))
+{
+    <div class="form-group">
+        <div class="input-group">
+
+            @Html.TextBox("submitid", ViewBag.CurrentFilter as string, new { @class = "form-control text-right" })
+            <div class="input-group-addon">بر اساس شماره سفارش</div>
+        </div>
+
+    </div>
+    <input type="submit" value="جستجو" />
+
+}
+
+    </div>
+    <div class="col-md-6">
+@using (Html.BeginForm("OrderList", "ShowForm", FormMethod.Get, new { @class = "form-inline" }))
+{
+    <div class="form-group">
+        <div class="input-group">
+
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control text-right" })
+            <div class="input-group-addon">بر اساس نام</div>
+        </div>
+
+    </div>
+    <input type="submit" value="جستجو" />
+
+}
+
+    </div>
+</div>
+
+
+
+<br />
+<table class="table table-striped text-right" style="direction:rtl">
+    <tr>
+        <th class="text-right">
+            نام و نام خانوادگی
+        </th>
+        
+        <th class="text-right">
+            @Html.DisplayNameFor(model => model.First().Phone)
+        </th>
+        <th class="text-right">
+            @Html.DisplayNameFor(model => model.First().Mobile)
+        </th>
+        <th class="text-right">
+            @Html.DisplayNameFor(model => model.First().Email)
+        </th>
+        <th class="text-right">
+           شماره سفارش
+        </th>
+        <th>نمایش فاکتور</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mobile)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubmitFormId)
+        </td>
+        <td>
+            <a class="jq-btn" data-url="/FormGenerate/ShowForm/Invoice/@item.SubmitFormId" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">مشاهده فاکتور</a> | 
+            <a href="/FormGenerate/ShowForm/PrintInvoice/@item.SubmitFormId" target="_blank">چاپ فاکتور</a>
+        </td>
+    </tr>
+}
+
+</table>
+<br />
+صفحه @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) از @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("OrderList",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

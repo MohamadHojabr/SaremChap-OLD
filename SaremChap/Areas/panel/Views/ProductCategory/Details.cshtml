@@ -1,0 +1,19 @@
+﻿@model Domainclasses.Modes.ProductCategory
+<div class="call-action call-action-boxed call-action-style2 clearfix text-right">
+
+  <div class="row">
+
+      <div class="col-md-3">
+          <img src="@Model.imege" class="img-thumbnail" width="200" />
+
+      </div>
+      <div class="col-md-9">
+         <h3>@Html.DisplayFor(model => model.name)</h3> 
+
+          <p>@Html.DisplayFor(model => model.describtion)
+</p>
+      </div>
+
+  </div>
+</div>
+

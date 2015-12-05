@@ -1,0 +1,72 @@
+﻿@model SaremChap.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+
+<div class="init-page"></div>
+<div class="call-action call-action-boxed call-action-style2 clearfix">
+    <div class="container" style="text-align:right; margin-top:30px;margin-bottom:30px">
+        <div class="row">
+            <div class="col-md-8">
+                <img src="~/Images/WallImages/pageimages/Logo.png" style="padding:100px 50px 50px 50px" />
+            </div>
+            <div class ="col-md-4 call-action call-action-boxed call-action-style3 clearfix">
+                @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                        <h4 style="color:#ffffff">ثبت نام در چاپ صارم <i class="fa fa-edit "></i></h4>
+                    <hr />
+                    @Html.ValidationSummary()
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control text-right", placeholder = "نام کاربری" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control text-right", placeholder = "رمز عبور" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control text-right", placeholder = "تکرار رمز عبور" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" class="btn-system border-btn btn-medium btn-wite" value="  ثبت  " />
+                        </div>
+                    </div>
+                }
+
+            </div>
+            </div>
+        </div>
+</div>
+
+
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+
+
+@section TagMeta{
+
+
+    چاپ صارم چاپ روی انواع سطوح
+
+
+
+}
+
+@section ContentMeta{
+
+    چاپ صارم چاپ روی انواع سطوح
+
+}
+
+@section AuthorMeta{
+    گروه صنعتی چاپ صارم ارائه دهنده خدمات نوین چاپ
+}

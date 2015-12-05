@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Domainclasses.Modes.Gallery>
+
+@{
+    ViewBag.Title = "imageGallery";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<link href="~/Content/plugins/CSS3Lightbox/css/demo.css" rel="stylesheet" />*@
+<link href="~/Content/plugins/CSS3Lightbox/css/style3.css" rel="stylesheet" />
+<div class="init-page"></div>
+
+@foreach (var item in Model)
+{
+    
+    <a class="jq-btn" data-url="SelectGallery/@item.GalleryId" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">@item.name</a>
+
+
+}
+
+<div id="sectionContents"></div>
+
+<script>
+   
+
+    $(".jq-btn").click(function (e) {
+        var urlParam = $(this).data('url');
+
+        $.ajax({
+
+            //مشخص کردن  اکشنی که باید فراخوانی شود
+
+            url: urlParam,
+            contentType: 'application/html; charset=utf-8',
+            type: 'GET',
+            //نوع نتیجه بازگشتی
+            dataType: 'html'
+
+        })
+.success(function (result) {
+    //زمانی که کدهای سمت سرور بدون خطا اجرا شده اند
+    //این قسمت فراخوانی می‌شود و نتیجه اکشن درون متغیر
+    //result
+    //قرار می‌گیرد
+    $('#sectionContents').html(result);
+})
+.error(function (xhr, status) {
+    alert(xhr.responseText);
+});
+    });
+</script>
+@section TagMeta{
+
+
+    چاپ صارم چاپ روی انواع سطوح
+
+
+
+}
+
+@section ContentMeta{
+
+    چاپ صارم چاپ روی انواع سطوح
+
+}
+
+@section AuthorMeta{
+    گروه صنعتی چاپ صارم ارائه دهنده خدمات نوین چاپ
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Domainclasses.Modes.Value>
+@{
+    ViewBag.Title = "نتایج سفارشات";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<table class="table table-striped text-right">
+    <thead>
+        <tr>
+            <td>مشاهده سفارش</td>
+            <td>سفارش شماره</td>
+        </tr>
+    </thead>
+
+    <tbody>
+@foreach (var group in Model.GroupBy(item => item.SubmitId))
+{
+
+        <tr>
+            <td><a href='/FormGenerate/ShowForm/showFormResualItem/@Html.Encode(group.Key)'>مشاهده سفارش شماره : @group.Key</a></td>
+            <td>@group.Key</td>
+</tr>
+
+
+}
+
+    </tbody>
+</table>
+
+
+    
+
+
+
+

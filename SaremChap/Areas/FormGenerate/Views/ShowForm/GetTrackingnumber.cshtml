@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "دریافت کد رهگیری";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="init-page"></div>
+
+<style>
+    .cont {
+        background: #f3f3f3;
+        border-right: 10px solid #ccc;
+        margin: 1.5em 10px;
+        padding: 0.5em 10px;
+        quotes: "\201C""\201D""\2018""\2019";
+    }
+
+        .cont:before {
+            color: #cf3131;
+            content: open-quote;
+            font-size: 8em;
+            line-height: 0.1em;
+            margin-right: 0.25em;
+            vertical-align: -0.4em;
+        }
+
+        .cont p {
+            display: inline;
+        }
+</style>
+<div class="cont text-right">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="/Content/images/icon/tick_green.png">
+            </div>
+            <div class="col-md-6">
+                <h2>سفارش شما با موفقیت ثبت گردید</h2>
+
+                <h3>شما با استفاده از کد رهگیری میتوانید از وضعیت سفارش خود مطلع شوید</h3>
+
+                <h3> شماره پیگیری : @ViewBag.trackingnumber</h3>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+
+@section TagMeta{
+
+
+    چاپ صارم چاپ روی انواع سطوح
+
+
+
+}
+
+@section ContentMeta{
+
+    چاپ صارم چاپ روی انواع سطوح
+
+}
+
+@section AuthorMeta{
+    گروه صنعتی چاپ صارم ارائه دهنده خدمات نوین چاپ
+}
+
+
+
+

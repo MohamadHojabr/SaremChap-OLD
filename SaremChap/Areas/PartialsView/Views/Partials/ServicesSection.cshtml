@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Domainclasses.Modes.ProductCategory>
+<link href="~/Content/css/animate.css" rel="stylesheet" />
+ <!-- Start Portfolio Section -->
+<div class="section full-width-portfolio" style="border-top:0; border-bottom:0; background:#fff;">
+    <!-- Start Big Heading -->
+    <div class="big-title text-center bg10" data-animation="fadeInDown" data-animation-delay="01">
+        <h1> <strong>انواع خدمات چاپ صارم</strong></h1>
+    </div>
+    <!-- End Big Heading -->
+    <!--<p class="text-center">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+        <br/>veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</p>-->
+    <!-- Start Recent Projects Carousel -->
+    <ul id="portfolio-list" data-animated="fadeIn">
+@foreach (var item in Model)
+{
+
+
+        <li style="border:thin solid #d8d8d8" data-animation="flipInY" data-animation-delay="01">
+            <span class="header">@item.name</span>
+
+            <td>
+                @if (item.ProductCategoryFileses.Count == 0)
+                {
+
+                    <img width="120" class="img-thumbnail" src="~/Content/images/image-not-found.jpg" alt="چاپ صارم | sarem chap"/>
+                }
+                else
+                {
+                    foreach (var file in item.ProductCategoryFileses)
+                    {
+
+                        var url = string.Format("/images/Services/service/{0}", file.FileName);
+                        <p>
+                            @file.FileName
+                        </p>
+                        <div>
+                            <img class="img-thumbnail" src=@url alt="@file.FileName" />
+                        </div>
+                    }
+
+                }
+            </td>
+            <div class="portfolio-item-content">
+                <span class="header">@item.name</span>
+
+            </div>
+            <a href="/view/Product/Category/@item.ProductCategoryID"><i class="more">+</i></a>
+        </li>
+}
+       
+    </ul>
+    <!-- End Recent Projects Carousel -->
+
+</div>
+<!-- End Portfolio Section -->
+<script>
+
+</script>

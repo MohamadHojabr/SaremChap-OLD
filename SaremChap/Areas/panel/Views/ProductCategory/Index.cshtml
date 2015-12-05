@@ -1,0 +1,114 @@
+﻿@*@model IEnumerable<Domainclasses.Modes.ProductCategory>*@
+@model PagedList.IPagedList<Domainclasses.Modes.ProductCategory>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "لیست گروه محصولات";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Sidebar{
+    گروه محصولات
+}
+
+<p>
+    <a class="jq-btn" data-url="/panel/ProductCategory/Create" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">ایجاد گروه جدید</a>
+</p>
+<table class="table table-bordered" style="direction:rtl">
+    <tr>
+        <th style="text-align:center">
+            گروه بالا دستی
+        </th>
+
+        <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.First().name)
+        </th>
+        <th style="text-align: center">
+
+           تصویر
+        </th>
+        <th style="text-align: center">
+            @Html.DisplayNameFor(model => model.First().describtion)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr style="text-align:center">
+            <td>
+                @{
+        string value = item.SuperCategory.ToString();
+        var str = "";
+        // ... Switch on the string.
+        switch (value)
+        {
+            case "TilePrint":
+                str = "چاپ روی انواع کاشی";
+                break;
+            case "DishPrint":
+                str = "چاپ روی انواع ظروف";
+                break;
+            case "ClothesPrint":
+                str = "چاپ روی انواع لباس";
+                break;
+            case "OtherPrint":
+                str = "چاپ روی دیگر سطوح";
+                break;
+
+        }
+                }
+
+                @str
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @if (item.ProductCategoryFileses.Count == 0)
+                {
+
+                    <img width="100" class="img-thumbnail" src="~/Content/images/image-not-found.jpg"  alt="sarem chap | چاپ صارم "/>
+                }
+                else
+                {
+                    foreach (var file in item.ProductCategoryFileses)
+                    {
+
+                        var url = string.Format("/images/Services/productCategory/{0}", file.FileName);
+                        
+                        <div>
+                            <img width="100" class="img-thumbnail" src=@url alt="@file.FileName" />
+                        </div>
+                    }
+
+                }
+            </td>
+            <td>
+                @{
+        var trunc = Html.Raw(System.Web.HttpUtility.HtmlDecode(item.describtion));
+
+
+                }
+
+
+                @Truncate.TruncateString(trunc.ToString(), 150)
+
+            </td>
+            <td>
+                <a class="jq-btn" data-url="/panel/ProductCategory/Edit/@item.ProductCategoryID" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">اصلاح</a> |
+                <a class="jq-btn" data-url="/panel/ProductCategory/Details/@item.ProductCategoryID" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">جزئیات</a> |
+                <a class="jq-btn" data-url="/panel/ProductCategory/Delete/@item.ProductCategoryID" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">حذف</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<br />
+صفحه @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) از @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

@@ -1,0 +1,39 @@
+﻿@model Domainclasses.Modes.Chapter
+
+<div class="call-action call-action-boxed call-action-style2 clearfix text-right">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.ChapterId)
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "نام گروه", style = "text-align:right" })
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+                @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            </div>
+
+            <div class="form-group" style="margin-top:40px">
+                <div class="col-md-12">
+                    <input type="submit" value="  ثبت  " class="btn-system btn-large" />
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+<script>
+    $(document).ready(function () {
+        $("form").validetta();
+    })
+    $('input').attr('data-validetta', 'required');
+    $('textarea').attr('data-validetta', 'required');
+    $('select').attr('data-validetta', 'required');
+    $("select").addClass("form-control")
+
+</script>

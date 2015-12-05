@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Domainclasses.Modes.Price>
+
+@{
+    ViewBag.Title = "لیست قیمت های محصول";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Sidebar{
+    گروه محصولات
+}
+
+
+<p>
+    <a class="jq-btn" data-url="/panel/Prices/Create" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">ایجاد قیمت محصول</a>
+</p>
+<table class="table table-bordered" style="direction:rtl">
+    <tr>
+        <th class="text-right">
+            @Html.DisplayNameFor(model => model.product.name)
+        </th>
+        <th class="text-right">
+            @Html.DisplayNameFor(model => model.neme)
+        </th>
+        <th class="text-right">
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+
+        <th class="text-right">
+            @Html.DisplayNameFor(model => model.value)
+        </th>
+        <th class="text-center">عملیات</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.product.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.neme)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.value)
+        </td>
+        <td class="text-center">
+            <a class="jq-btn" data-url="/panel/Prices/Edit/@item.priceID" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">اصلاح</a> |
+            <a class="jq-btn" data-url="/panel/Prices/Details/@item.priceID" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">جزئیات</a> |
+            <a class="jq-btn" data-url="/panel/Prices/Delete/@item.priceID" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">حذف</a>
+        </td>
+    </tr>
+}
+
+</table>

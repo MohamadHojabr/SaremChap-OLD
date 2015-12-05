@@ -1,0 +1,22 @@
+﻿@model Domainclasses.Modes.Product
+<div class="call-action call-action-boxed call-action-style2 clearfix text-right">
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <img src="@Model.imege" class="img-thumbnail" width="200" />
+
+        </div>
+        <div class="col-md-9">
+            <h3>@Html.DisplayFor(model => model.name)</h3>
+            <br />
+            <h5> گروه : @Html.DisplayFor(model => model.ProductCategory.name)</h5>
+
+            <p style="direction:rtl">
+                @Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.describtion))
+        </p>
+    </div>
+
+</div>
+</div>
+

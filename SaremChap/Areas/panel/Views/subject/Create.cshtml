@@ -1,0 +1,175 @@
+﻿@model Domainclasses.Modes.Subject
+
+@{
+    var subjectDate = DateTime.Now;
+}
+
+<div class="call-action call-action-boxed call-action-style2 clearfix text-right">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-vertical">
+            @Html.ValidationSummary(true)
+            <div class="row">
+
+                <div class="col-md-3">
+                    @Html.EnumDropDownListFor(model => model.Status,"--انتخاب کنید--", new { @class = "form-control", style = "text-align:right" })
+                    @Html.ValidationMessageFor(model => model.Status)
+                </div>
+                <div class="col-md-3" style="direction:rtl">
+                    <p>نمایش اختصاصی در :</p>
+                </div>
+
+
+
+                <div class="col-md-3">
+                    @Html.DropDownList("ChapterId", "--انتخاب کنید--")
+                    @Html.ValidationMessageFor(model => model.ChapterId)
+                </div>
+                <div class="col-md-3" style="direction:rtl">
+                    <p>گروه مصلب :</p>
+                </div>
+
+
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-4">
+                   
+                    @Html.TextBoxFor(model => model.SubjectDate, new { @class = "form-control", Value = subjectDate, style = "text-align:right" })
+                    @Html.ValidationMessageFor(model => model.SubjectDate)
+                </div>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.Authors, new { @class = "form-control", placeholder = "نویسنده", style = "text-align:right" })
+                    @Html.ValidationMessageFor(model => model.Authors)
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.SubjectLead, new { @class = "form-control", placeholder = "عنوان مطلب", style = "text-align:right" })
+                    @Html.ValidationMessageFor(model => model.SubjectLead)
+                </div>
+
+
+
+
+            </div>
+            <br />
+            <div class="row">
+                <div class="form-group">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <img class="img-thumbnail" id="preview-image" src="/Content/images/icon/camera.png" width="128" style="cursor:pointer" />
+                                    <input type="hidden" class="image" id="SubjectImage" name="SubjectImage" value="" />
+                                </div>
+                                @Html.ValidationMessageFor(model => model.SubjectImage)
+                            </div>
+                            <div class="col-md-10" id="imagelist" style="display:none">
+                                @{Html.RenderAction("imageList", "GalleryItem", new { Area = "panel" });}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.TextAreaFor(model => model.SubjectContent, new { @class = "form-controls", placeholder = "توضاحات", style = "text-align:right"})
+                    @Html.ValidationMessageFor(model => model.SubjectContent)
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    <input type="submit" value="  ثبت  " class="btn-system btn-large" />
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+<script src="~/Content/plugins/ckeditor/ckeditor.js"></script>
+
+<script>
+    if (CKEDITOR.env.ie && CKEDITOR.env.version < 9)
+        CKEDITOR.tools.enableHtml5Elements(document);
+    CKEDITOR.config.height = 150;
+    CKEDITOR.config.width = 'auto';
+    CKEDITOR.config.language = 'fa';
+    CKEDITOR.config.skin = 'office2013';
+    var initSample = (function () {
+        var wysiwygareaAvailable = isWysiwygareaAvailable(),
+            isBBCodeBuiltIn = !!CKEDITOR.plugins.get('bbcode');
+
+        return function () {
+            var editorElement = CKEDITOR.document.getById('SubjectContent');
+
+            if (wysiwygareaAvailable) {
+                CKEDITOR.replace('SubjectContent');
+            } else {
+                editorElement.setAttribute('contenteditable', 'true');
+                CKEDITOR.inline('SubjectContent');
+            }
+        };
+
+        function isWysiwygareaAvailable() {
+            if (CKEDITOR.revision == ('%RE' + 'V%')) {
+                return true;
+            }
+
+            return !!CKEDITOR.plugins.get('wysiwygarea');
+        }
+    })();
+
+    initSample();
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("form").validetta();
+    })
+    $('input').attr('data-validetta', 'required');
+    $('textarea').attr('data-validetta', 'required');
+    $('select').attr('data-validetta', 'required');
+    $("select").addClass("form-control")
+
+
+    $("#preview-image").click(function () {
+        $("#imagelist").fadeToggle();
+    })
+
+    $("select").addClass("form-control")   
+
+    $(".upload-btn").click(function (e) {
+        var urlParam = $(this).data('url');
+
+        $.ajax({
+
+            //مشخص کردن  اکشنی که باید فراخوانی شود
+
+            url: urlParam,
+            contentType: 'application/html; charset=utf-8',
+            type: 'GET',
+            //نوع نتیجه بازگشتی
+            dataType: 'html'
+
+        })
+.success(function (result) {
+    //زمانی که کدهای سمت سرور بدون خطا اجرا شده اند
+    //این قسمت فراخوانی می‌شود و نتیجه اکشن درون متغیر
+    //result
+    //قرار می‌گیرد
+    $('#uploadSection').html(result);
+})
+.error(function (xhr, status) {
+    alert(xhr.responseText);
+});
+    });
+
+</script>
+
+

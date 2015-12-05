@@ -1,0 +1,17 @@
+﻿@model Domainclasses.Modes.Gallery
+
+<div class="call-action call-action-boxed call-action-style2 clearfix text-right">
+
+    <div class="row">
+
+        <div class="col-md-9">
+            <h3>@Html.DisplayFor(model => model.name)</h3>
+            <br />
+
+            <p style="direction:rtl">
+                @Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.describtion))
+            </p>
+        </div>
+
+    </div>
+</div>

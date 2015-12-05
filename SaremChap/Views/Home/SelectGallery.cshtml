@@ -1,0 +1,106 @@
+﻿@model IEnumerable<Domainclasses.Modes.Gallery>
+@{
+   
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<link href="~/Content/plugins/CSS3Lightbox/css/demo.css" rel="stylesheet" />*@
+<link href="~/Content/plugins/CSS3Lightbox/css/style3.css" rel="stylesheet" />
+<div class="init-page"></div>
+
+
+
+
+    <!-- Codrops top bar -->
+    @foreach (var item in Model)
+    {
+        ViewBag.Title = item.name;
+<div class="page-banner" style="padding:40px 0; background: url(/Content/images/slide-02-bg.jpg) center #f9f9f9;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <ul class="breadcrumbs" style="width:100%; text-align:right">
+                    <li>گالری تصاویر</li>
+                    <li><a href="/">صفحه اصلی</a></li>
+                </ul>
+            </div>
+            <div class="col-md-6" style="text-align:right">
+                <h2>گالری تصاویر
+</h2>
+                <p>@Html.DisplayFor(modelItem => item.name)
+</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container call-action call-action-boxed call-action-style1 clearfix" style="margin-top:30px;text-align:right">
+
+
+
+
+    <ul class="lb-album">
+
+        @foreach (var image in item.GalleryItem)
+            {
+
+
+        <li class="">
+            <a href="#image-@image.GalleryItemId">
+                <img src=@image.url alt=@image.name>
+                <span>@image.name</span>
+            </a>
+            <div class="lb-overlay" id="image-@image.GalleryItemId" style="margin-top:50px">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src=@image.url alt=@image.name />
+
+                    </div>
+                    <div class="col-md-6">
+
+                        <h3>@image.name</h3>
+                        <p>@image.describtion</p>
+                        <br />
+
+                    </div>
+                    <div>
+                        <a href="#image-10" class="lb-prev">قبلی</a>
+                        <a href="#image-2" class="lb-next">بعدی</a>
+                    </div>
+                    <a href="#page" class="lb-close">x بستن</a>
+
+                </div>
+
+            </div>
+        </li>
+
+            }
+
+    </ul>
+</div>
+
+        }
+
+
+
+<br /><br />
+@section TagMeta{
+    @foreach (var person in Model)
+    {
+        @person.name<text>,</text>
+    }
+
+
+}
+
+@section ContentMeta{
+    @foreach (var person in Model)
+    {
+        @person.describtion<text>.</text>
+    }
+}
+
+@section AuthorMeta{
+    گروه صنعتی چاپ صارم ارائه دهنده خدمات نوین چاپ
+}

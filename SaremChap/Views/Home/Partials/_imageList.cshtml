@@ -1,0 +1,94 @@
+﻿@model SaremChap.Models.ImagesModel
+
+<div class="row" id="IMG-thumbnail">
+    @foreach (var src in Model.Images)
+    {
+
+        <div class="col-md-3">
+            <div style="border:thin solid #ebebeb; padding:4px; margin-top:4px">
+
+                <div><p class="pull-left">@src</p></div>
+                <img src="/Images/WallImages/imagepath/@src" width="89" />
+                <div class="caption">
+                    <div class="btn-group">
+                        @*<a href="#" class="btn btn-default btn-sm fa fa-eye" data-container=".caption" data-toggle="popover" data-placement="left" data-content='<img src=" @Url.Content("~/Images/WallImages/imagepath/" + src) " width=" 50" style="padding:1px" />' data-html="true"> </a>*@
+                        
+                        <a href="#" class="btn btn-default btn-sm fa fa-trash-o" id="deleteIMG" title="@src"> </a>
+                        <a id="insertImage" href="" title="@Url.Action("Edit" + "/" + Model.ImageId, new { ImageUrl = "Images/WallImages/imagepath" + src })" class="btn btn-default btn-sm fa fa-eye fa fa-ticket" role="button"> </a>
+                    </div>
+                </div>
+                <p style="direction:rtl"> آدرس تصویر : </p>
+                <p style="border:thin solid #ebebeb; padding:2px">/Images/WallImages/imagepath/@src</p>
+            </div>
+            @*<div class="thumbnail">
+                <img src="@Url.Content("~/Uploads/Images/" + src)" alt="..."/>
+
+                <div class="caption">
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-default btn-sm glyphicon glyphicon-trash" id="deleteIMG" title="@src"> </a>
+                        <a id="insertImage" href="#" title="@Url.Action("Edit"+ "/" + Model.ImageId, new { ImageUrl = "/Uploads/Images/" + src })" class="btn btn-default btn-sm glyphicon glyphicon-check" role="button"> </a>
+                    </div>
+                </div>
+                </div>*@
+        </div>
+    }
+
+
+</div>
+
+<script type="text/javascript">
+    $("[data-toggle=popover]").popover();
+    //$('#deleteIMG').click(function () {
+    $(".caption").on("click", ".fa-trash-o", function () {
+
+        $.ajax({
+            type: "POST",
+            url: "/home/DeletePhoto",
+            data: { photoFileName: $(this).attr("title") },
+            datatype: "html",
+            success: function () {
+                $.ajax({
+
+                    url: "/home/imageList",
+                    contentType: 'application/html; charset=utf-8',
+                    type: 'GET',
+                    dataType: 'html'
+
+                })
+                                 .success(function (result) {
+
+                                     $('#imageList-container').html(result).fadeIn();
+
+
+                                 })
+            }
+        });
+    });
+
+
+    $(".caption").on("click", ".glyphicon-check", function () {
+
+        var hrefToEdit = $(this).attr("title");
+
+        //alert($(this).attr("title"));
+        $.ajax({
+            type: 'GET',
+            url: hrefToEdit,
+            contentType: 'application/html; charset=utf-8',
+            dataType: 'html'
+
+        })
+
+
+  .success(function (result) {
+      $('#sectionContents').empty();
+      $('#sectionContents').html(result).fadeIn();
+      $('#myModal').modal('hide');
+      $(".modal-backdrop").hide();
+      //alert("image change successfol")
+  })
+  .error(function (xhr, status) {
+      alert(xhr.responseText);
+  });
+    });
+</script>

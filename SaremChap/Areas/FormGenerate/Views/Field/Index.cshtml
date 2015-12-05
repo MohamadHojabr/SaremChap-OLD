@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Domainclasses.Modes.Field>
+
+@{
+    ViewBag.Title = "لیست فبلد";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Form.Fa_Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TitleEn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TitleFa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequiredField)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DisabledField)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Options)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FieldType)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Form.Fa_Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TitleEn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TitleFa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequiredField)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DisabledField)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Options)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FieldType)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

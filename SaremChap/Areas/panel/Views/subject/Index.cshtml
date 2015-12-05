@@ -1,0 +1,115 @@
+﻿@model PagedList.IPagedList<Domainclasses.Modes.Subject>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+
+@{
+    ViewBag.Title = "لیست مطالب";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Sidebar{
+    مطلب
+}
+
+<p>
+    <a class="jq-btn" data-url="/panel/subject/Create" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">ایجاد مطلب جدید</a>
+</p>
+<table class="table table-bordered" style="direction:rtl">
+    <tr>
+        <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.First().Chapter.Name)
+        </th>
+        <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.First().Authors)
+        </th>
+        <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.First().SubjectLead)
+        </th>
+        <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.First().SubjectContent)
+        </th>
+        <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.First().SubjectImage)
+        </th>
+        <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.First().Status)
+        </th>
+        <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.First().SubjectDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr style="text-align:center">
+            <td>
+                @Html.DisplayFor(modelItem => item.Chapter.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Authors)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubjectLead)
+            </td>
+            <td>
+                @{
+        var trunc = Html.Raw(System.Web.HttpUtility.HtmlDecode(item.SubjectContent));
+
+
+                }
+
+
+                @Truncate.TruncateString(trunc.ToString(), 30)
+            </td>
+            <td>
+                <img src="@item.SubjectImage" alt="@item.SubjectLead" title="@item.SubjectLead" class="img-thumbnail" width="80" />
+            </td>
+            <td>
+
+                @{
+        string value = item.Status.ToString();
+        var str="";
+        // ... Switch on the string.
+        switch (value)
+        {
+            case "Slideshow":
+                str = "بخش اسلایدشو";
+                break;
+            case "Special":
+                str = "بخش محصول ویژه";
+                break;
+            case "Products":
+                str = " بخش محصولات";
+                break;
+            case "MainMenu":
+                str = " منوی اصلی";
+                break;
+            case "Disable":
+                str = " غیر فعال";
+                break;
+        }
+                }
+
+                @str
+            </td>
+            <td>
+                @item.SubjectDate.ToString("MM/dd/yyyy")
+                
+            </td>
+            
+            <td>
+                <a class="jq-btn" data-url="/panel/subject/Edit/@item.SubjectId" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">اصلاح</a> |
+                <a class="jq-btn" data-url="/panel/subject/Details/@item.SubjectId" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">جزئیات</a> |
+                <a class="jq-btn" data-url="/panel/subject/Delete/@item.SubjectId" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">حذف</a>
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+صفحه @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) از @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

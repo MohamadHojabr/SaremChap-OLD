@@ -1,0 +1,43 @@
+﻿@model Domainclasses.Modes.Form
+<div class="call-action call-action-boxed call-action-style2 clearfix text-right">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.Fa_Title, new { @class = "form-control", placeholder = "عنوان فارس فرم", style = "text-align:right" })
+                    @Html.ValidationMessageFor(model => model.Fa_Title)
+                </div>
+                @Html.LabelFor(model => model.Fa_Title, new { @class = "control-label col-md-2" })
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.En_Title, new { @class = "form-control", placeholder = "عنوان انگلیسی فرم", style = "text-align:right" })
+                    @Html.ValidationMessageFor(model => model.En_Title)
+                </div>
+                @Html.LabelFor(model => model.En_Title, new { @class = "control-label col-md-2" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Product_ID, "Product_ID", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("Product_ID", String.Empty)
+                    @Html.ValidationMessageFor(model => model.Product_ID)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+</div>

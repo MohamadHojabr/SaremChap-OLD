@@ -1,0 +1,178 @@
+﻿@model Domainclasses.Modes.Field
+
+<link href="~/Content/plugins/jQuery-Tags-Input-master/jquery.tagsinput.css" rel="stylesheet" />
+<script src="~/Content/plugins/jQuery-Tags-Input-master/jquery.tagsinput.js"></script>
+<div class="call-action call-action-boxed call-action-style2 clearfix text-right">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-group" style="text-align:right">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-8">
+                                @Html.DropDownList("FormId", String.Empty)
+                                @Html.ValidationMessageFor(model => model.FormId)
+                            </div>
+                            <div class="col-md-4">
+                                <span>  فرم مربوطه  </span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-8">
+                                @Html.EnumDropDownListFor(model => model.FieldType, new { @class = " form-control", id = "fieldtype" })
+                                @Html.ValidationMessageFor(model => model.FieldType)
+                            </div>
+                            <div class="col-md-4">
+                                <span>  نوع فیلد  </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="form-group" style="text-align:right">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(model => model.TitleEn, new { @class = " form-control" })
+                                @Html.ValidationMessageFor(model => model.TitleEn)
+                            </div>
+                            <div class="col-md-4">
+                                <span>  عنوان انگلیسی  </span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(model => model.TitleFa, new { @class = " form-control" })
+                                @Html.ValidationMessageFor(model => model.TitleFa)
+                            </div>
+                            <div class="col-md-4">
+                                <span>  عنوان فارسی  </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="form-group" style="text-align:right">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row" id="finance" style="display:none">
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(model => model.Finance, new { @class = " form-control", id = "finance" })
+                                @Html.ValidationMessageFor(model => model.Finance)
+                            </div>
+                            <div class="col-md-4">
+                                <span>  بار مالی  </span>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.EffectivePrice)
+                                @Html.ValidationMessageFor(model => model.EffectivePrice)
+                                <span>موثر در قیمت</span>
+                            </div>
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.RequiredField)
+                                @Html.ValidationMessageFor(model => model.RequiredField)
+                                <span>فیلد اجباری</span>
+                            </div>
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.DisabledField)
+                                @Html.ValidationMessageFor(model => model.DisabledField)
+                                <span>فیلد غیر فعال</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+            <hr />
+            <div class="form-group" style="text-align:right">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row" id="optionField" style="display:none">
+                            <div class="col-md-8 input-group">
+
+                                @Html.TextBoxFor(model => model.Options, new { @class = " form-control tags", id = "tags_1" })
+                                @Html.ValidationMessageFor(model => model.Options)
+
+
+                            </div>
+                            <div class="col-md-4">
+                                <span>  Options  </span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="form-group" style="text-align:right">
+                <div class="col-md-12">
+                    <input type="submit" value=" اعمال تغییرات" class="submitclick" />
+                </div>
+            </div>
+            <script>
+
+                $('#EffectivePrice').change(
+                     function () {
+                         if ($("#EffectivePrice").is(':checked')) {
+                             $('#finance').show();
+
+                         } else {
+                             $('#finance').hide();
+                         }
+                     });
+
+                $('#fieldtype').change(
+                function () {
+
+                    if ($(this).val() == 1) {
+                        $('#optionField').show();
+                    }
+                    else if ($(this).val() == 7) {
+                        $('#optionField').show();
+                    } else {
+                        $('#optionField').hide();
+                    }
+                });
+
+                $('#tags_1').tagsInput({ width: 'auto' });
+            </script>
+
+
+        </div>
+    }
+</div>

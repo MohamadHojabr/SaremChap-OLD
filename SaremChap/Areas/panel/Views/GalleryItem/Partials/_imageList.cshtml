@@ -1,0 +1,50 @@
+﻿@model SaremChap.Models.ImagesModel
+
+<link href="~/Content/plugins/owl.carousel/owl-carousel/owl.carousel.css" rel="stylesheet" />
+<link href="~/Content/plugins/owl.carousel/owl-carousel/owl.theme.css" rel="stylesheet" />
+<script src="~/Content/plugins/owl.carousel/owl-carousel/owl.carousel.js"></script>
+
+<div id="owl-example" class="owl-carousel">
+    @foreach (var src in Model.Images)
+    {
+
+        <div>
+
+            <img class="img-thumbnail selectimage" src="/Images/WallImages/imagepath/@src" width="128" style="cursor:pointer; margin-top:5px" />
+
+        </div>
+    }
+
+
+</div>
+<br />
+<a class="btn-system next" style="padding:5px; cursor:pointer">بعدی</a>
+<a class="btn-system prev" style="padding: 5px; cursor: pointer">قبلی</a>
+
+    <script>
+
+    $(document).ready(function () {
+        var owl = $("#owl-example");
+        $("#owl-example").owlCarousel({
+            pagination:false,
+            lazyLoad: true,
+            navigation: false,
+
+        });
+        // Custom Navigation Events
+        $(".next").click(function () {
+            owl.trigger('owl.next');
+        })
+        $(".prev").click(function () {
+            owl.trigger('owl.prev');
+        })
+
+    });
+
+    $(".selectimage").click(function () {
+        var src = $(this).attr("src")
+        $(".image").attr("value", src)
+        $("#preview-image").attr("src", src)
+        $("#imagelist").fadeToggle();
+    })
+    </script>
