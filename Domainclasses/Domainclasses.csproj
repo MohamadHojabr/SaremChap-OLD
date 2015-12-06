@@ -86,14 +86,6 @@
     <Compile Include="Context\SaremContext.cs" />
     <Compile Include="Enums\FileType.cs" />
     <Compile Include="Enums\SourceType.cs" />
-    <Compile Include="Migrations\201512040955028_lk.cs" />
-    <Compile Include="Migrations\201512040955028_lk.Designer.cs">
-      <DependentUpon>201512040955028_lk.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201512041005521_sd.cs" />
-    <Compile Include="Migrations\201512041005521_sd.Designer.cs">
-      <DependentUpon>201512041005521_sd.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201512041149544_product category files.cs" />
     <Compile Include="Migrations\201512041149544_product category files.Designer.cs">
       <DependentUpon>201512041149544_product category files.cs</DependentUpon>
@@ -124,12 +116,6 @@
     <Folder Include="ViewModel\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201512040955028_lk.resx">
-      <DependentUpon>201512040955028_lk.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201512041005521_sd.resx">
-      <DependentUpon>201512041005521_sd.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512041149544_product category files.resx">
       <DependentUpon>201512041149544_product category files.cs</DependentUpon>
     </EmbeddedResource>
