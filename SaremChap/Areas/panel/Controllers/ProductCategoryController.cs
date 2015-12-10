@@ -149,7 +149,10 @@ namespace SaremChap.Areas.panel.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProductCategory productcategory = db.ProductCategories.Find(id);
+            ProductCategory productcategory =
+                db.ProductCategories.Find(id);
+
+            
             if (productcategory == null)
             {
                 return HttpNotFound();
@@ -162,10 +165,42 @@ namespace SaremChap.Areas.panel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="ProductCategoryID,name,imege,describtion,SuperCategory")] ProductCategory productcategory)
+        public ActionResult Edit([Bind(Include="ProductCategoryID,name,imege,describtion,SuperCategory")] ProductCategory productcategory,HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
+                var files =
+                    db.ProductCategoryFiles.FirstOrDefault(p => p.ProductCategoryID == productcategory.ProductCategoryID);
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    if (files!=null)
+                    {
+                        var oldPath = string.Format("{0}\\{1}", Path, files.FileName);
+                        if (System.IO.File.Exists(oldPath))
+                        {
+                            System.IO.File.Delete(oldPath);
+                        }
+
+                        db.ProductCategoryFiles.Remove(files);
+                    }
+                    var photo = new ProductCategoryFiles
+                    {
+                        FileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(upload.FileName),
+                        FileType = FileType.Photo,
+                        ProductCategoryID = productcategory.ProductCategoryID
+                        
+                    };
+                    productcategory.ProductCategoryFileses = new List<ProductCategoryFiles>();
+                    productcategory.ProductCategoryFileses.Add(photo);
+                    CreatePath();
+                    var path = string.Format("{0}\\{1}", Path, photo.FileName);
+                    upload.SaveAs(path);
+                    db.ProductCategoryFiles.Add(photo);
+
+                }
+
+               
+
                 db.Entry(productcategory).State = EntityState.Modified;
                 db.SaveChanges();
                 updateSiteMap updateSiteMap = new updateSiteMap();
