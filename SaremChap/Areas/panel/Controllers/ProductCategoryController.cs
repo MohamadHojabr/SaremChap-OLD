@@ -199,8 +199,6 @@ namespace SaremChap.Areas.panel.Controllers
 
                 }
 
-               
-
                 db.Entry(productcategory).State = EntityState.Modified;
                 db.SaveChanges();
                 updateSiteMap updateSiteMap = new updateSiteMap();
@@ -213,6 +211,7 @@ namespace SaremChap.Areas.panel.Controllers
         // GET: /panel/ProductCategory/Delete/5
         public ActionResult Delete(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -230,6 +229,19 @@ namespace SaremChap.Areas.panel.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            var files =
+                db.ProductCategoryFiles.FirstOrDefault(p => p.ProductCategoryID == id);
+            if (files!=null)
+            {
+                var oldPath = string.Format("{0}\\{1}", Path, files.FileName);
+                if (System.IO.File.Exists(oldPath))
+                {
+                    System.IO.File.Delete(oldPath);
+                }
+
+                db.ProductCategoryFiles.Remove(files);
+
+            }
             ProductCategory productcategory = db.ProductCategories.Find(id);
             db.ProductCategories.Remove(productcategory);
             db.SaveChanges();
