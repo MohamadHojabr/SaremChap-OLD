@@ -1,5 +1,19 @@
-﻿
- <!-- Start Client/Partner Section -->
+﻿<style>
+
+
+    #owl-partner .item {
+        margin: 3px;
+    }
+
+        #owl-partner .item img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+
+</style>
+<!-- Start Client/Partner Section -->
 <div class="partner">
     <div class="container">
         <div class="row">
@@ -8,55 +22,35 @@
                 <h1>مشتریان <strong>چاپ صارم</strong></h1>
                 <p class="title-desc">لیست برخی از مشتریان چاپ صارم</p>
             </div>
-            <!-- End Big Heading -->
-            <!--Start Clients Carousel-->
-            <div class="our-clients">
-                <div class="clients-carousel custom-carousel touch-carousel navigation-3" data-appeared-items="5" data-navigation="true">
-
-                    <!-- Client 1 -->
-                    <div class="client-item item">
-                        <a href="#"><img src="../Content/images/c1.png" alt="" /></a>
-                    </div>
-
-                    <!-- Client 2 -->
-                    <div class="client-item item">
-                        <a href="#"><img src="../Content/images/c2.png" alt="" /></a>
-                    </div>
-
-                    <!-- Client 3 -->
-                    <div class="client-item item">
-                        <a href="#"><img src="../Content/images/c3.png" alt="" /></a>
-                    </div>
-
-                    <!-- Client 4 -->
-                    <div class="client-item item">
-                        <a href="#"><img src="../Content/images/c4.png" alt="" /></a>
-                    </div>
-
-                    <!-- Client 5 -->
-                    <div class="client-item item">
-                        <a href="#"><img src="../Content/images/c5.png" alt="" /></a>
-                    </div>
-
-                    <!-- Client 6 -->
-                    <div class="client-item item">
-                        <a href="#"><img src="../Content/images/c6.png" alt="" /></a>
-                    </div>
-
-                    <!-- Client 7 -->
-                    <div class="client-item item">
-                        <a href="#"><img src="../Content/images/c7.png" alt="" /></a>
-                    </div>
-
-                    <!-- Client 8 -->
-                    <div class="client-item item">
-                        <a href="#"><img src="../Content/images/c8.png" alt="" /></a>
-                    </div>
-
+            <div id="owl-partner" class="owl-carousel">
+                <div class="item"><img class="lazyOwl" data-src="../Content/images/c1.png" alt="Lazy Owl Image"></div>
+                <div class="item">
+                    <img class="lazyOwl" data-src="../Content/images/c2.png" alt="Lazy Owl Image">
                 </div>
+                <div class="item"><img class="lazyOwl" data-src="../Content/images/c3.png" alt="Lazy Owl Image"></div>
+                <div class="item"><img class="lazyOwl" data-src="../Content/images/c4.png" alt="Lazy Owl Image"></div>
+                <div class="item"><img class="lazyOwl" data-src="../Content/images/c5.png" alt="Lazy Owl Image"></div>
+                <div class="item"><img class="lazyOwl" data-src="../Content/images/c6.png" alt="Lazy Owl Image"></div>
+                <div class="item"><img class="lazyOwl" data-src="../Content/images/c7.png" alt="Lazy Owl Image"></div>
+                <div class="item"><img class="lazyOwl" data-src="../Content/images/c8.png" alt="Lazy Owl Image"></div>
             </div>
-            <!-- End Clients Carousel -->
+
         </div><!-- .row -->
     </div><!-- .container -->
 </div>
-<!-- End Client/Partner Section -->
+<script>
+
+
+    $(document).ready(function () {
+
+        $("#owl-partner").owlCarousel({
+            items: 6,
+            lazyLoad: true,
+            navigation: false,
+            pagination:true
+        });
+
+    });
+
+
+</script>

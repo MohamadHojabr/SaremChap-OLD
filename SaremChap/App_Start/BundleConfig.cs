@@ -23,7 +23,8 @@ namespace SaremChap
                     "~/Scripts/respond.js",
                     "~/Content/plugins/dropzone/dropzone.js",
                     "~/Content/plugins/jquery.validetta/validetta.min.js",
-                    "~/Content/plugins/jquery.validetta/validettaLang-fa-IR.js"
+                    "~/Content/plugins/jquery.validetta/validettaLang-fa-IR.js",
+                    "~/Content/plugins/owl.carousel/owl-carousel/owl.carousel.min.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/Front/js").Include(
@@ -53,6 +54,9 @@ namespace SaremChap
                     "~/Content/plugins/jquery.validetta/validetta.css")
                 .Include("~/Content/css/font-awesome.css",
                     new CssRewriteUrlTransform()
+                )
+                .Include("~/Content/plugins/owl.carousel/owl-carousel/owl.carousel.css",
+                new CssRewriteUrlTransform()
                 ));
         }
     }

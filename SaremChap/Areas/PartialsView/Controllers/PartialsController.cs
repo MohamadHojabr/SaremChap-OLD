@@ -1,96 +1,109 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
-using Domainclasses.Modes;
 using Domainclasses.Context;
-
+using Domainclasses.Modes;
 
 namespace SaremChap.Areas.PartialsView.Controllers
 {
     public class PartialsController : Controller
     {
-        private SaremContext db = new SaremContext();
+        private readonly SaremContext db = new SaremContext();
         //
         // GET: /PartialsView/Partials/
+        [ChildActionOnly]
         public ActionResult indexSlideShow()
         {
             var subjects = db.Subjects.Where(x => x.Status == Status.Slideshow).ToList();
-            return View(subjects);
+            return PartialView("indexSlideShow", subjects);
         }
 
-        public ActionResult  serviceSection()
+        [ChildActionOnly]
+        public ActionResult serviceSection()
         {
-            return View();
+            return PartialView("serviceSection");
         }
+
+        [ChildActionOnly]
         public ActionResult purchaseSection()
         {
-            var subjects = db.Subjects.Where(x => x.Status == Status.Special).FirstOrDefault();
-            return View(subjects);
-
-            
+            var subjects = db.Subjects.FirstOrDefault(x => x.Status == Status.Special);
+            return PartialView("purchaseSection", subjects);
         }
+
+        [ChildActionOnly]
         public ActionResult ProductIntroductionSection()
         {
-            return View();
+            return PartialView("ProductIntroductionSection");
         }
+
+        [ChildActionOnly]
         public ActionResult ServicesSection()
         {
-           
-            return View( db.ProductCategories.ToList());
+            return PartialView("ServicesSection", db.ProductCategories.ToList());
         }
+
+        [ChildActionOnly]
         public ActionResult TestimonialsSection()
         {
             var list = db.Subjects.Where(x => x.Status != Status.Products)
                 .OrderByDescending(x => x.SubjectDate)
                 .Take(10);
-            return View(list);
+            return PartialView("TestimonialsSection", list);
         }
+
+        [ChildActionOnly]
         public ActionResult parallaxSection()
         {
-            return View();
+            return PartialView("parallaxSection");
         }
+
+        [ChildActionOnly]
         public ActionResult partnerSection()
         {
-            return View();
+            return PartialView("partnerSection");
         }
 
+        [ChildActionOnly]
         public ActionResult uploadPanel()
         {
-            return View();
+            return PartialView("uploadPanel");
         }
 
+        [ChildActionOnly]
         public ActionResult LSCategoryList()
         {
             var list = db.Chapters.ToList();
-            return View(list);
+            return PartialView("LSCategoryList", list);
         }
 
+        [ChildActionOnly]
         public ActionResult LatesPost()
         {
-            var list = db.Subjects.Where(x=>x.Status!=Status.Disable)
-                .OrderByDescending(x=>x.SubjectDate)
+            var list = db.Subjects.Where(x => x.Status != Status.Disable)
+                .OrderByDescending(x => x.SubjectDate)
                 .Take(5);
-            return View(list);
+            return PartialView("LatesPost", list);
         }
 
+        [ChildActionOnly]
         public ActionResult ChapterInMenu()
         {
             var list = db.Chapters.ToList();
-            return View(list);
+            return PartialView("ChapterInMenu", list);
         }
 
+        [ChildActionOnly]
         public ActionResult ProductInMenu()
         {
             var list = db.ProductCategories.ToList();
-            return View(list);
+            return PartialView("ProductInMenu", list);
         }
 
-
-
-	}
+        [ChildActionOnly]
+        public ActionResult GalleriesInMenu()
+        {
+            var list = db.Galleries.ToList();
+            return PartialView("GalleriesInMenu", list);
+        }
+    }
 }

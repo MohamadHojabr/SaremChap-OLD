@@ -234,6 +234,7 @@
     <Content Include="Content\images\flickr-03.jpg" />
     <Content Include="Content\images\flickr-04.jpg" />
     <Content Include="Content\images\footer-margo.png" />
+    <Content Include="Content\images\icons\AjaxLoader.gif" />
     <Content Include="Content\images\logos.png" />
     <Content Include="Content\images\map.png" />
     <Content Include="Content\images\margo.png" />
@@ -819,6 +820,9 @@
     <Content Include="Content\plugins\ckeditor\plugins\wsc\LICENSE.md" />
     <Content Include="Content\plugins\ckeditor\plugins\wsc\README.md" />
     <Content Include="Content\plugins\ckeditor\README.md" />
+    <Content Include="Areas\PartialsView\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\PartialsView\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\PartialsView\Views\Partials\GalleriesInMenu.cshtml" />
     <None Include="Properties\PublishProfiles\SaremChap.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jHtmlArea-0.8.js" />
@@ -889,7 +893,6 @@
     <Folder Include="Areas\panel\Models\" />
     <Folder Include="Areas\panel\Views\Shared\" />
     <Folder Include="Areas\PartialsView\Models\" />
-    <Folder Include="Areas\PartialsView\Views\Shared\" />
     <Folder Include="Areas\view\Models\" />
     <Folder Include="Areas\view\Views\Shared\" />
     <Folder Include="Images\Services\" />
