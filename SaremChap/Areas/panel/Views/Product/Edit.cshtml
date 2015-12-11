@@ -1,14 +1,14 @@
 ﻿@model Domainclasses.Modes.Product
 
 <div class="call-action call-action-boxed call-action-style2 clearfix text-right">
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Edit", "Product", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 
         <div class="form-vertical">
 
             @Html.ValidationSummary(true)
-            @Html.HiddenFor(model => model.ProductCategoryID)
+            @Html.HiddenFor(model => model.ProductID)
 
             <div class="form-group">
                 <div class="col-md-6">
@@ -25,21 +25,37 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="input-group">
-                                <img class="img-thumbnail" id="preview-image" src="@Model.imege" width="128" style="cursor:pointer" />
-                                <input type="hidden" class="image" id="imege" name="imege" value="@Model.imege" />
-                            </div>
-                            @Html.ValidationMessageFor(model => model.imege)
-                        </div>
-                        <div class="col-md-10" id="imagelist" style="display:none">
-                            @{Html.RenderAction("imageList", "GalleryItem", new { Area = "panel" });}
-                        </div>
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <input class="file-upload" type="file" id="Photo" name="upload" />
+
                     </div>
+                    <div class="col-md-6">
+                        @if (Model.Files.Count == 0)
+                        {
+
+                            <img width="100" class="img-thumbnail" src="~/Content/images/image-not-found.jpg" alt="sarem chap | چاپ صارم " />
+                        }
+                        else
+                        {
+                            foreach (var file in Model.Files)
+                            {
+
+                                var url = string.Format("/images/Services/service/{0}", file.FileName);
+
+                                <div>
+                                    <img width="100" class="img-thumbnail" src=@url alt="@file.FileName" />
+                                </div>
+                            }
+
+                        }
+
+                    </div>
+
                 </div>
+
             </div>
  
            </div>

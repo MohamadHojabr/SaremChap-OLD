@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Domainclasses.Modes;
 using Domainclasses.Context;
 using Domainclasses.Enums;
-using SaremChap.Models;
+using Domainclasses.Modes;
 using PagedList;
 using File = Domainclasses.Modes.ProductFiles;
 
@@ -155,10 +153,36 @@ namespace SaremChap.Areas.panel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="ProductID,ProductCategoryID,name,imege,describtion")] Product product)
+        public ActionResult Edit([Bind(Include="ProductID,ProductCategoryID,name,imege,describtion")] Product product, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
+                var file = db.Files.FirstOrDefault(p => p.ProductId == product.ProductID);
+                if (file != null)
+                {
+                    db.Files.Remove(file);
+                    var oldPath = string.Format("{0}\\{1}", Path, file.FileName);
+                    if (System.IO.File.Exists(oldPath))
+                    {
+                        System.IO.File.Delete(oldPath);
+                    }
+                }
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    var photo = new File
+                    {
+                        FileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(upload.FileName),
+                        FileType = FileType.Photo,
+                        ProductId = product.ProductID
+                    };
+                    product.Files = new List<File>();
+                    product.Files.Add(photo);
+                    CreatePath();
+                    var path = string.Format("{0}\\{1}", Path, photo.FileName);
+                    db.Files.Add(photo);
+                    upload.SaveAs(path);
+                }
+                
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -187,6 +211,17 @@ namespace SaremChap.Areas.panel.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            var file = db.Files.FirstOrDefault(p => p.ProductId == id);
+            if (file != null)
+            {
+                db.Files.Remove(file);
+                var oldPath = string.Format("{0}\\{1}", Path, file.FileName);
+                if (System.IO.File.Exists(oldPath))
+                {
+                    System.IO.File.Delete(oldPath);
+                }
+
+            }
             Product product = db.Products.Find(id);
             db.Products.Remove(product);
             db.SaveChanges();

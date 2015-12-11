@@ -4,9 +4,26 @@
     <div class="row">
 
         <div class="col-md-3">
-            <img src="@Model.imege" class="img-thumbnail" width="200" />
+            @if (Model.Files.Count == 0)
+            {
 
+                <img class="img-thumbnail" src="~/Content/images/image-not-found.jpg" alt="sarem chap | چاپ صارم " />
+            }
+            else
+            {
+                foreach (var file in Model.Files)
+                {
+
+                    var url = string.Format("/images/Services/Service/{0}", file.FileName);
+
+                    <div>
+                        <img class="img-thumbnail" src=@url alt="@file.FileName" />
+                    </div>
+                }
+
+            }
         </div>
+
         <div class="col-md-9">
             <h3>@Html.DisplayFor(model => model.name)</h3>
             <br />
