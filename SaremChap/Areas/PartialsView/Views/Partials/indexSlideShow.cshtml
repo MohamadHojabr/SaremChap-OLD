@@ -31,7 +31,23 @@
                 @foreach (var item in Model)
                 {
                     <div class="item">
-                        <img class="img-responsive" src="@item.SubjectImage" alt="slider">
+                        @if (item.SubjectFiles.Count == 0)
+                        {
+
+                            <img class="img-thumbnail" src="~/Content/images/image-not-found.jpg" alt="sarem chap | چاپ صارم " />
+                        }
+                        else
+                        {
+                            foreach (var file in item.SubjectFiles)
+                            {
+
+                                var url = string.Format("/images/Services/subject/{0}", file.FileName);
+                                <div>
+                                    <img class="img-thumbnail" src=@url alt="@item.SubjectLead" />
+                                </div>
+                            }
+
+                        }
                         <div class="slider-content">
                             <div class="col-md-12 text-center">
                                 <h2 class="animated2 white">

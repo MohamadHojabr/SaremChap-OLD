@@ -6,7 +6,23 @@
             <div class="col-md-7" style="background-color:rgba(0, 0, 0, 0.5); padding:20px; border-radius:5px;"data-animation-delay="04" data-animation="slideInLeft">
                 <div class="row">
                     <div class="col-md-8">
-                        <img src=@Model.SubjectImage />
+                        @if (Model.SubjectFiles.Count == 0)
+                        {
+
+                            <img class="img-thumbnail" src="~/Content/images/image-not-found.jpg" alt="sarem chap | چاپ صارم " />
+                        }
+                        else
+                        {
+                            foreach (var file in Model.SubjectFiles)
+                            {
+
+                                var url = string.Format("/images/Services/subject/{0}", file.FileName);
+                                <div>
+                                    <img class="img-thumbnail" src=@url alt="@Model.SubjectLead" />
+                                </div>
+                            }
+
+                        }
                     </div>
                     <div class="col-md-4" style="color:white">
                         <p style="color:#fff; text-align:justify;direction:rtl;font-size:18px">

@@ -6,8 +6,6 @@
 }
 
 
-<script src="~/Content/plugins/jueryPagination/jquery.twbsPagination.min.js"></script>
-@*<div class="init-page"></div>*@
 
 <!-- Container -->
 <div id="container">
@@ -49,7 +47,23 @@
                              <div class="post-head" style="background:#f1f1f1">
                                  <a href="#">
                                      <div class="thumb-overlay"><i class="fa fa-arrows-alt"></i></div>
-                                     <img alt="" src="@item.SubjectImage">
+                                     @if (item.SubjectFiles.Count == 0)
+                                     {
+
+                                         <img class="img-thumbnail" src="~/Content/images/image-not-found.jpg" alt="sarem chap | چاپ صارم " />
+                                     }
+                                     else
+                                     {
+                                         foreach (var file in item.SubjectFiles)
+                                         {
+
+                                             var url = string.Format("/images/Services/subject/{0}", file.FileName);
+                                             <div>
+                                                 <img class="img-thumbnail" src=@url alt="@item.SubjectLead" />
+                                             </div>
+                                         }
+
+                                     }
                                  </a>
                              </div>
                         <!-- Post Content -->
@@ -129,23 +143,9 @@
 
 </div>
 <!-- End Container -->
-<!-- Go To Top Link -->
-<a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
 
 
 
-<div id="page-content" class="well">Page 25</div>
-
-<script>
-    $('#pagination-demo').twbsPagination({
-        totalPages: 13,
-        visiblePages: 5,
-        
-        onPageClick: function (event, page) {
-            $('#page-content').text('Page ' + page);
-        }
-    });
-</script>
 
 @section TagMeta{
     @foreach (var person in Model)

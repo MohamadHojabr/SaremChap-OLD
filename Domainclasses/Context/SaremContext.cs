@@ -56,6 +56,8 @@ namespace Domainclasses.Context
         public DbSet<GalleryItem> GalleryItems { get; set; }
         public DbSet<ProductFiles> Files { get; set; }
         public DbSet<ProductCategoryFiles> ProductCategoryFiles { get; set; }
+        public DbSet<SubjectFiles> SubjectFileses { get; set; }
+
 
     }
 }

@@ -5,32 +5,36 @@
 }
 
 <div class="call-action call-action-boxed call-action-style2 clearfix text-right">
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Create", "Subject", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 
         <div class="form-vertical">
             @Html.ValidationSummary(true)
             <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <input class="file-upload" type="file" id="Photo" name="upload" />
+                        </div>
+                    </div>
+                </div>
 
-                <div class="col-md-3">
-                    @Html.EnumDropDownListFor(model => model.Status,"--انتخاب کنید--", new { @class = "form-control", style = "text-align:right" })
+
+                <div class="col-md-4">
+                    <p>نمایش اختصاصی در :</p>
+
+                    @Html.EnumDropDownListFor(model => model.Status, "--انتخاب کنید--", new {@class = "form-control", style = "text-align:right"})
                     @Html.ValidationMessageFor(model => model.Status)
                 </div>
-                <div class="col-md-3" style="direction:rtl">
-                    <p>نمایش اختصاصی در :</p>
-                </div>
 
 
+                <div class="col-md-4">
+                    <p>گروه مصلب :</p>
 
-                <div class="col-md-3">
                     @Html.DropDownList("ChapterId", "--انتخاب کنید--")
                     @Html.ValidationMessageFor(model => model.ChapterId)
                 </div>
-                <div class="col-md-3" style="direction:rtl">
-                    <p>گروه مصلب :</p>
-                </div>
-
 
             </div>
             <br />
@@ -55,27 +59,8 @@
 
             </div>
             <br />
+
             <div class="row">
-                <div class="form-group">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-2">
-                                <div class="input-group">
-                                    <img class="img-thumbnail" id="preview-image" src="/Content/images/icon/camera.png" width="128" style="cursor:pointer" />
-                                    <input type="hidden" class="image" id="SubjectImage" name="SubjectImage" value="" />
-                                </div>
-                                @Html.ValidationMessageFor(model => model.SubjectImage)
-                            </div>
-                            <div class="col-md-10" id="imagelist" style="display:none">
-                                @{Html.RenderAction("imageList", "GalleryItem", new { Area = "panel" });}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="form-group">
                 <div class="col-md-12">
                     @Html.TextAreaFor(model => model.SubjectContent, new { @class = "form-controls", placeholder = "توضاحات", style = "text-align:right"})
                     @Html.ValidationMessageFor(model => model.SubjectContent)

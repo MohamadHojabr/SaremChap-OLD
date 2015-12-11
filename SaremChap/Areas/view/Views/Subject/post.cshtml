@@ -43,7 +43,23 @@
                         <div class="post-head" style="background:#f1f1f1">
                             <a href="#">
                                 <div class="thumb-overlay"><i class="fa fa-arrows-alt"></i></div>
-                                <img alt="" src="@Model.SubjectImage">
+                                @if (Model.SubjectFiles.Count == 0)
+                                {
+
+                                    <img class="img-thumbnail" src="~/Content/images/image-not-found.jpg" alt="sarem chap | چاپ صارم " />
+                                }
+                                else
+                                {
+                                    foreach (var file in Model.SubjectFiles)
+                                    {
+
+                                        var url = string.Format("/images/Services/subject/{0}", file.FileName);
+                                        <div>
+                                            <img class="img-thumbnail" src=@url alt="@Model.SubjectLead" />
+                                        </div>
+                                    }
+
+                                }
                             </a>
                         </div>
                         <!-- End Single Post (Gallery) -->

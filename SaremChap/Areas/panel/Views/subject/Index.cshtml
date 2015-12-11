@@ -30,7 +30,7 @@
             @Html.DisplayNameFor(model => model.First().SubjectContent)
         </th>
         <th style="text-align:center">
-            @Html.DisplayNameFor(model => model.First().SubjectImage)
+            تصویر مطلب
         </th>
         <th style="text-align:center">
             @Html.DisplayNameFor(model => model.First().Status)
@@ -64,7 +64,23 @@
                 @Truncate.TruncateString(trunc.ToString(), 30)
             </td>
             <td>
-                <img src="@item.SubjectImage" alt="@item.SubjectLead" title="@item.SubjectLead" class="img-thumbnail" width="80" />
+                @if (item.SubjectFiles.Count == 0)
+                {
+
+                    <img width="100" class="img-thumbnail" src="~/Content/images/image-not-found.jpg" alt="sarem chap | چاپ صارم " />
+                }
+                else
+                {
+                    foreach (var file in item.SubjectFiles)
+                    {
+
+                        var url = string.Format("/images/Services/subject/{0}", file.FileName);
+                        <div>
+                            <img width="100" class="img-thumbnail" src=@url alt="@file.FileName" />
+                        </div>
+                    }
+
+                }
             </td>
             <td>
 

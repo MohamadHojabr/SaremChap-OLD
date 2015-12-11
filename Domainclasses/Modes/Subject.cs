@@ -28,15 +28,13 @@ namespace Domainclasses.Modes
         [DisplayName("متن خبر")]
         [AllowHtml]
         public string SubjectContent { get; set; }
-        [Required(ErrorMessage = "عکس خبر وارد نشده است")]
-        [DisplayName("عکس خبر")]
-        public string SubjectImage { get; set; }
         [DisplayName("وضعیت خبر")]
         public Status Status { get; set; }
         [DisplayName("تاریخ مطلب")]
 
         public DateTime SubjectDate { get; set; }
         public virtual Chapter Chapter { get; set; }
+        public virtual ICollection<SubjectFiles> SubjectFiles { get; set; }
     }
 
     public enum Status

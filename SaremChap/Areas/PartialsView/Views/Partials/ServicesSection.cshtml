@@ -30,11 +30,9 @@
                     {
 
                         var url = string.Format("/images/Services/service/{0}", file.FileName);
-                        <p>
-                            @file.FileName
-                        </p>
+                      
                         <div>
-                            <img class="img-thumbnail" src=@url alt="@file.FileName" />
+                            <img class="img-thumbnail" src=@url alt="@item.name" />
                         </div>
                     }
 

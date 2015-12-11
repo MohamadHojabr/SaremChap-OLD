@@ -8,7 +8,27 @@
 
         <li>
             <div class="widget-thumb">
-                <a href="#"><img src=@item.SubjectImage alt="" /></a>
+                <a href="#">
+                    @if (item.SubjectFiles.Count == 0)
+                    {
+
+                        <img class="img-thumbnail" src="~/Content/images/image-not-found.jpg" alt="sarem chap | چاپ صارم " />
+                    }
+                    else
+                    {
+                        foreach (var file in item.SubjectFiles)
+                        {
+
+                            var url = string.Format("/images/Services/subject/{0}", file.FileName);
+                            <div>
+                                <img class="img-thumbnail" src=@url alt="@item.SubjectLead" />
+                            </div>
+                        }
+
+                    }
+
+
+                </a>
             </div>
             <div class="widget-content">
                 <h5><a href="#">@item.SubjectLead</a></h5>

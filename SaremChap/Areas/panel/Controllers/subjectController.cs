@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Domainclasses.Modes;
 using Domainclasses.Context;
+using Domainclasses.Enums;
 using SaremChap.Models;
 using PagedList;
 
@@ -16,6 +18,47 @@ namespace SaremChap.Areas.panel.Controllers
     public class subjectController : Controller
     {
         private SaremContext db = new SaremContext();
+
+        private string Directory
+        {
+            get
+            {
+                var originalDirectory = new DirectoryInfo(string.Format("{0}Images\\Services", Server.MapPath(@"\"))).ToString();
+                return originalDirectory;
+            }
+        }
+
+        private string Path
+        {
+            get
+            {
+                string pathString = System.IO.Path.Combine(Directory, "subject");
+                return pathString;
+            }
+        }
+
+        private bool PathIsExists
+        {
+            get
+            {
+                if (System.IO.Directory.Exists(Path)) return true;
+                return false;
+            }
+        }
+
+        private void CreatePath()
+        {
+            if (!PathIsExists)
+            {
+                System.IO.Directory.CreateDirectory(Path);
+            }
+            else
+            {
+                //todo
+            }
+
+        }
+
 
         // GET: /panel/subject/
         public ActionResult Index(int? page)
@@ -60,12 +103,26 @@ namespace SaremChap.Areas.panel.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="SubjectId,ChapterId,Authors,SubjectLead,SubjectContent,SubjectImage,Status,SubjectDate")] Subject subject)
+        public ActionResult Create([Bind(Include = "SubjectId,ChapterId,Authors,SubjectLead,SubjectContent,Status,SubjectDate")] Subject subject, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
+
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    var photo = new SubjectFiles
+                    {
+                        FileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(upload.FileName),
+                        FileType = FileType.Photo
+                    };
+                    subject.SubjectFiles = new List<SubjectFiles> {photo};
+                    CreatePath();
+                    var path = string.Format("{0}\\{1}", Path, photo.FileName);
+                    upload.SaveAs(path);
+                }
+
+
                 db.Subjects.Add(subject);
-                
                 db.SaveChanges();
                 updateSiteMap updateSiteMap = new updateSiteMap();
                 updateSiteMap.UpdateSiteMap("http://www.saremchap.ir/view/Subject/post/" + subject.SubjectId, "add");
@@ -98,10 +155,37 @@ namespace SaremChap.Areas.panel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="SubjectId,ChapterId,Authors,SubjectLead,SubjectContent,SubjectImage,Status,SubjectDate")] Subject subject)
+        public ActionResult Edit([Bind(Include = "SubjectId,ChapterId,Authors,SubjectLead,SubjectContent,Status,SubjectDate")] Subject subject, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
+
+                var file = db.SubjectFileses.FirstOrDefault(p => p.SubjectId == subject.SubjectId);
+                if (file != null)
+                {
+                    db.SubjectFileses.Remove(file);
+                    var oldPath = string.Format("{0}\\{1}", Path, file.FileName);
+                    if (System.IO.File.Exists(oldPath))
+                    {
+                        System.IO.File.Delete(oldPath);
+                    }
+                }
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    var photo = new SubjectFiles
+                    {
+                        FileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(upload.FileName),
+                        FileType = FileType.Photo,
+                        SubjectId = subject.SubjectId
+                    };
+                    subject.SubjectFiles = new List<SubjectFiles>();
+                    subject.SubjectFiles.Add(photo);
+                    CreatePath();
+                    var path = string.Format("{0}\\{1}", Path, photo.FileName);
+                    db.SubjectFileses.Add(photo);
+                    upload.SaveAs(path);
+                }
+
                 db.Entry(subject).State = EntityState.Modified;
                 db.SaveChanges();
                 updateSiteMap updateSiteMap = new updateSiteMap();
@@ -133,6 +217,19 @@ namespace SaremChap.Areas.panel.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            var file = db.SubjectFileses.FirstOrDefault(p => p.SubjectId == id);
+            if (file != null)
+            {
+                db.SubjectFileses.Remove(file);
+                var oldPath = string.Format("{0}\\{1}", Path, file.FileName);
+                if (System.IO.File.Exists(oldPath))
+                {
+                    System.IO.File.Delete(oldPath);
+                }
+
+            }
+
+
             Subject subject = db.Subjects.Find(id);
             db.Subjects.Remove(subject);
             db.SaveChanges();
