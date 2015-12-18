@@ -26,8 +26,8 @@
         <th style="text-align:center">
             @Html.DisplayNameFor(model => model.First().describtion)
         </th>
-        <th style="text-align:center">
-            @Html.DisplayNameFor(model => model.First().url)
+        <th style="text-align: center">
+            تصویر
         </th>
         <th></th>
     </tr>
@@ -45,7 +45,23 @@
             @Truncate.TruncateString(item.describtion, 90)
         </td>
         <td>
-            <img src="@item.url" class="img-thumbnail" width="100" />
+            @if (item.name==null)
+            {
+
+                <img width="100" class="img-thumbnail" src="~/Content/images/image-not-found.jpg" alt="sarem chap | چاپ صارم " />
+            }
+            else
+            {
+
+
+                var url = string.Format("/images/Services/gallery/{0}", item.FileName);
+                    <div>
+                        <img width="100" class="img-thumbnail" src=@url alt="@item.name" />
+                    </div>
+               
+
+            }
+
         </td>
         <td>
             <a class="jq-btn" data-url="/panel/GalleryItem/Edit/@item.GalleryItemId" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">اصلاح</a> |

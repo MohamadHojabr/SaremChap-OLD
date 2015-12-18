@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Domainclasses.Enums;
 
 namespace Domainclasses.Modes
 {
@@ -19,10 +20,9 @@ namespace Domainclasses.Modes
         public string name { get; set; }
         [DisplayName("توضیحات")]
         public string describtion { get; set; }
-        [Required]
-        [DisplayName("تصویر")]
 
-        public string url { get; set; }
+        public string FileName { get; set; }
+        public FileType FileType { get; set; }
         public virtual Gallery Gallery { get; set; }
 
     }

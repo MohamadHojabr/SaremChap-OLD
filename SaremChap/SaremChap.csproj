@@ -895,7 +895,10 @@
     <Folder Include="Areas\PartialsView\Models\" />
     <Folder Include="Areas\view\Models\" />
     <Folder Include="Areas\view\Views\Shared\" />
-    <Folder Include="Images\Services\" />
+    <Folder Include="Images\Services\gallery\" />
+    <Folder Include="Images\Services\productCategory\" />
+    <Folder Include="Images\Services\service\" />
+    <Folder Include="Images\Services\subject\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

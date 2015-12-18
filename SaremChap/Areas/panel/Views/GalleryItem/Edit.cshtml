@@ -1,15 +1,12 @@
 ﻿@model Domainclasses.Modes.GalleryItem
-
 <div class="call-action call-action-boxed call-action-style2 clearfix text-right">
-
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Edit", "GalleryItem", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal" style="direction:rtl">
             @Html.ValidationSummary(true)
             @Html.HiddenFor(model => model.GalleryItemId)
-
             <div class="form-group">
                 <div class="col-md-10">
                     @Html.DropDownList("GalleryId", String.Empty)
@@ -17,7 +14,6 @@
                 </div>
                 گروه گالری
             </div>
-
             <div class="form-group">
                 <div class="col-md-10">
                     @Html.TextBoxFor(model => model.name, new { @class = "form-control", placeholder = "تصویر", style = "text-align:right" })
@@ -25,7 +21,6 @@
                 </div>
                 @Html.LabelFor(model => model.name, new { @class = "control-label col-md-2" })
             </div>
-
             <div class="form-group">
                 <div class="col-md-10">
                     @Html.TextBoxFor(model => model.describtion, new { @class = "form-control", placeholder = "تصویر", style = "text-align:right" })
@@ -33,20 +28,29 @@
                 </div>
                 @Html.LabelFor(model => model.describtion, new { @class = "control-label col-md-2" })
 
-
             </div>
 
-            <div class="form-group">
-                <div class="col-md-10">
-                    <div class="input-group">
-                        <img class="img-thumbnail" id="preview-image" src="@Model.url" width="128" style="cursor:pointer" />
-                        <input type="hidden" class="image" id="url" name="url" />
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="pull-left">
+                            <input class="file-upload" type="file" id="Photo" name="upload" />
+                        </div>
                     </div>
-                    @Html.ValidationMessageFor(model => model.url)
-                </div>
+                    <div class="col-md-6">
+                        @{
+        var url = string.Format("/images/Services/gallery/{0}", Model.FileName);
 
+                        }
+                        <div>
+                            <img width="100" class="img-thumbnail" src=@url alt="@Model.name" />
+                        </div>
+                    </div>
+
+                </div>
             </div>
 
+            <br/>
             <div class="form-group">
                 <div class="col-md-12">
                     <input type="submit" value="  ثبت  " class="btn-system btn-large" />
@@ -54,17 +58,8 @@
             </div>
         </div>
     }
-
-    <div id="imagelist" style="display:none">
-        @{Html.RenderAction("imageList", "GalleryItem", new { Area = "panel" });}
-    </div>
-
-
 </div>
 <script>
-    $("#preview-image").click(function () {
-        $("#imagelist").fadeToggle();
-    })
 
     $(document).ready(function () {
         $("form").validetta();

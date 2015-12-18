@@ -10,12 +10,58 @@ using Domainclasses.Modes;
 using Domainclasses.Context;
 using PagedList;
 using System.IO;
+using Domainclasses.Enums;
 using SaremChap.Models;
 
 namespace SaremChap.Areas.panel.Controllers
 {
+
+
+
     public class GalleryItemController : Controller
     {
+
+        private string Directory
+        {
+            get
+            {
+                var originalDirectory = new DirectoryInfo(string.Format("{0}Images\\Services", Server.MapPath(@"\"))).ToString();
+                return originalDirectory;
+            }
+        }
+
+        private string Path
+        {
+            get
+            {
+                string pathString = System.IO.Path.Combine(Directory, "gallery");
+                return pathString;
+            }
+        }
+
+        private bool PathIsExists
+        {
+            get
+            {
+                if (System.IO.Directory.Exists(Path)) return true;
+                return false;
+            }
+        }
+
+        private void CreatePath()
+        {
+            if (!PathIsExists)
+            {
+                System.IO.Directory.CreateDirectory(Path);
+            }
+            else
+            {
+                //todo
+            }
+
+        }
+
+
         private SaremContext db = new SaremContext();
 
         // GET: /panel/GalleryItem/
@@ -60,10 +106,22 @@ namespace SaremChap.Areas.panel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="GalleryItemId,GalleryId,name,describtion,url")] GalleryItem galleryitem)
+        public ActionResult Create([Bind(Include="GalleryItemId,GalleryId,name,describtion,url")] GalleryItem galleryitem, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
+                if (upload != null && upload.ContentLength > 0)
+                {
+
+                    galleryitem.FileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(upload.FileName);
+                    galleryitem.FileType = FileType.Photo;
+                   
+                   
+                    CreatePath();
+                    var path = string.Format("{0}\\{1}", Path, galleryitem.FileName);
+                    upload.SaveAs(path);
+                }
+
                 db.GalleryItems.Add(galleryitem);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -94,10 +152,26 @@ namespace SaremChap.Areas.panel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="GalleryItemId,GalleryId,name,describtion,url")] GalleryItem galleryitem)
+        public ActionResult Edit([Bind(Include="GalleryItemId,GalleryId,name,describtion,url")] GalleryItem galleryitem, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
+                var oldPath = string.Format("{0}\\{1}", Path, galleryitem.FileName);
+                if (System.IO.File.Exists(oldPath))
+                {
+                    System.IO.File.Delete(oldPath);
+                }
+
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    galleryitem.FileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(upload.FileName);
+                    galleryitem.FileType = FileType.Photo;
+                    CreatePath();
+                    var path = string.Format("{0}\\{1}", Path, galleryitem.FileName);
+                    upload.SaveAs(path);
+                }
+
+
                 db.Entry(galleryitem).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -128,41 +202,46 @@ namespace SaremChap.Areas.panel.Controllers
         {
             GalleryItem galleryitem = db.GalleryItems.Find(id);
             db.GalleryItems.Remove(galleryitem);
+            var path = string.Format("{0}\\{1}", Path, galleryitem.FileName);
+            if (System.IO.File.Exists(path))
+            {
+                System.IO.File.Delete(path);
+            }
             db.SaveChanges();
             return RedirectToAction("Index");
         }
 
-        public ActionResult imageList(int? imageid)
-        {
-            if (imageid.HasValue)
-            {
+        //public ActionResult imageList(int? imageid)
+        //{
+        //    if (imageid.HasValue)
+        //    {
 
-                var images = new ImagesModel();
-                //Read out files from the files directory
-                var files = Directory.GetFiles(Server.MapPath(@"~/Images/WallImages/imagepath"));
-                //Add them to the model
-                foreach (var file in files)
-                    images.Images.Add(Path.GetFileName(file));
-                images.ImageId = imageid.Value;
+        //        var images = new ImagesModel();
+        //        //Read out files from the files directory
+        //        var files = Directory.GetFiles(Server.MapPath(@"~/Images/WallImages/imagepath"));
+        //        //Add them to the model
+        //        foreach (var file in files)
+        //            images.Images.Add(Path.GetFileName(file));
+        //        images.ImageId = imageid.Value;
 
-                return PartialView("Partials/_imageList", images);
+        //        return PartialView("Partials/_imageList", images);
 
-            }
-            else
-            {
+        //    }
+        //    else
+        //    {
 
-                var images = new ImagesModel();
-                //Read out files from the files directory
-                var files = Directory.GetFiles(Server.MapPath(@"~/Images/WallImages/imagepath"));
-                //Add them to the model
-                foreach (var file in files)
-                    images.Images.Add(Path.GetFileName(file));
+        //        var images = new ImagesModel();
+        //        //Read out files from the files directory
+        //        var files = Directory.GetFiles(Server.MapPath(@"~/Images/WallImages/imagepath"));
+        //        //Add them to the model
+        //        foreach (var file in files)
+        //            images.Images.Add(Path.GetFileName(file));
 
 
-                return PartialView("Partials/_imageList", images);
+        //        return PartialView("Partials/_imageList", images);
 
-            }
-        }
+        //    }
+        //}
 
         protected override void Dispose(bool disposing)
         {

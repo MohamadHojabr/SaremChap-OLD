@@ -2,7 +2,7 @@
 
 <div class="call-action call-action-boxed call-action-style2 clearfix text-right">
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Create", "GalleryItem", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 
@@ -38,18 +38,16 @@
                     </div>
                     @Html.LabelFor(model => model.describtion, new { @class = "control-label col-md-2" })
                 </div>
-
-
-                <div class="form-group">
-                    <div class="col-md-10">
-                        <div class="input-group">
-                            <img class="img-thumbnail" id="preview-image" src="/Content/images/icon/camera.png" width="128" style="cursor:pointer"/>
-                            <input type="hidden" class="image" id="url" name="url" />
+                <br/>
+                <div class="col-md-12">
+                  
+                        <div class="col-md-10">
+                            <input class="file-upload" type="file" id="Photo" name="upload" />
                         </div>
-                         @Html.ValidationMessageFor(model => model.url)
-                    </div>
-
+                  
                 </div>
+
+              
             </div>
 
 
@@ -61,16 +59,9 @@
         </div>
     }
 
-    <div id="imagelist" style="display:none">
-        @{Html.RenderAction("imageList", "GalleryItem", new { Area = "panel" });}
-    </div>
-
 </div>
 
 <script>
-    $("#preview-image").click(function () {
-        $("#imagelist").fadeToggle();
-    })
 
     $(document).ready(function () {
         $("form").validetta();

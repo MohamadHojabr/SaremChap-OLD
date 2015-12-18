@@ -4,7 +4,11 @@
     <div class="row">
 
         <div class="col-md-3">
-            <img src="@Model.url" class="img-thumbnail" width="200" />
+            @{
+                var url = string.Format("/images/Services/gallery/{0}", Model.FileName);
+
+            }
+            <img src="@url" class="img-thumbnail" width="200" alt="@Model.name"/>
 
         </div>
         <div class="col-md-9">

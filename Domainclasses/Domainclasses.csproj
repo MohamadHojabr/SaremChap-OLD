@@ -95,6 +95,10 @@
     <Compile Include="Migrations\201512111741580_add subject files.Designer.cs">
       <DependentUpon>201512111741580_add subject files.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512181726318_modify gellery item.cs" />
+    <Compile Include="Migrations\201512181726318_modify gellery item.Designer.cs">
+      <DependentUpon>201512181726318_modify gellery item.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modes\Chapter.cs" />
     <Compile Include="Modes\CustomerInformation.cs" />
@@ -127,6 +131,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512111741580_add subject files.resx">
       <DependentUpon>201512111741580_add subject files.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512181726318_modify gellery item.resx">
+      <DependentUpon>201512181726318_modify gellery item.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
