@@ -45,8 +45,8 @@
                          <div class="blog-post standard-post" style="direction:rtl">
                         <!-- Post Thumb -->
                              <div class="post-head" style="background:#f1f1f1">
-                                 <a href="#">
-                                     <div class="thumb-overlay"><i class="fa fa-arrows-alt"></i></div>
+                               
+                                     
                                      @if (item.SubjectFiles.Count == 0)
                                      {
 
@@ -58,13 +58,16 @@
                                          {
 
                                              var url = string.Format("/images/Services/subject/{0}", file.FileName);
-                                             <div>
-                                                 <img class="img-thumbnail" src=@url alt="@item.SubjectLead" />
-                                             </div>
+
+                                             <a class="lightbox" data-lightbox-gallery="gallery1" href="@url" title="@item.SubjectLead">
+                                                 <div class="thumb-overlay"><i class="fa fa-arrows-alt"></i></div>
+                                                 <img class="img-thumbnail" src=@url alt="@item.SubjectLead"/>
+                                             </a>
+
                                          }
 
                                      }
-                                 </a>
+                                
                              </div>
                         <!-- Post Content -->
                         <div class="post-content">

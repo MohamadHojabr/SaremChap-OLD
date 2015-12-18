@@ -1,7 +1,6 @@
 /* ----------------- Start JS Document ----------------- */
 
 
-
 // Page Loader
 $(window).load(function () {
     "use strict";
@@ -133,7 +132,9 @@ $(document).ready(function ($) {
 		isPause,
 		tick,
 		percentTime;
-	$('.touch-slider').each(function(){
+	$('.touch-slider').each(function () {
+	    alert("script is run")
+
 		var owl = jQuery(this),
 			sliderNav = $(this).attr('data-slider-navigation'),
 			sliderPag = $(this).attr('data-slider-pagination'),
@@ -159,21 +160,22 @@ $(document).ready(function ($) {
 			var returnAutoPlay = true
 		}
 		
-		//owl.owlCarousel({
-		//	navigation : returnSliderNav,
-		//	pagination: returnSliderPag,
-		//	slideSpeed : 400,
-		//	paginationSpeed : 400,
-		//	lazyLoad : true,
-		//	singleItem: true,
-		//	autoHeight : true,
-		//	autoPlay: returnAutoPlay,
-		//	stopOnHover: returnAutoPlay,
-		//	transitionStyle : "fade",
-		//	afterInit : returnSliderProgressBar,
-		//	afterMove : moved,
-		//	startDragging : pauseOnDragging
-		//});
+		owl.owlCarousel({
+
+			navigation : returnSliderNav,
+			pagination: returnSliderPag,
+			slideSpeed : 400,
+			paginationSpeed : 400,
+			lazyLoad : true,
+			singleItem: true,
+			autoHeight : true,
+			autoPlay: returnAutoPlay,
+			stopOnHover: returnAutoPlay,
+			transitionStyle : "fade",
+			afterInit : returnSliderProgressBar,
+			afterMove : moved,
+			startDragging : pauseOnDragging
+		});
 		
 	});
 
@@ -222,32 +224,33 @@ $(document).ready(function ($) {
 	
 	
 	
-	////------- Projects Carousel
-	//$(".projects-carousel").owlCarousel({
-	//	navigation : true,
-	//	pagination: false,
-	//	slideSpeed : 400,
-	//	stopOnHover: true,
-    //	autoPlay: 3000,
-    //	items : 4,
-    //	itemsDesktopSmall : [900,3],
-	//	itemsTablet: [600,2],
-	//	itemsMobile : [479, 1]
-	//});
+	//------- Projects Carousel
+	$(".projects-carousel").owlCarousel({
+		navigation : true,
+		pagination: false,
+		slideSpeed : 400,
+		stopOnHover: true,
+    	autoPlay: 3000,
+    	items : 4,
+    	itemsDesktopSmall : [900,3],
+		itemsTablet: [600,2],
+		itemsMobile: [479, 1],
+		lazyLoad: true
+	});
 	
 	
 	
-	////------- Testimonials Carousel
-	//$(".testimonials-carousel").owlCarousel({
-	//	navigation : true,
-	//	pagination: false,
-	//	slideSpeed : 2500,
-	//	stopOnHover: true,
-    //	autoPlay: 3000,
-    //	singleItem:true,
-	//	autoHeight : true,
-	//	transitionStyle : "fade"
-	//});
+	//------- Testimonials Carousel
+	$(".testimonials-carousel").owlCarousel({
+		navigation : true,
+		pagination: false,
+		slideSpeed : 2500,
+		stopOnHover: true,
+    	autoPlay: 3000,
+    	singleItem:true,
+		autoHeight : true,
+		transitionStyle : "fade"
+	});
 	
 	
 	
@@ -430,11 +433,11 @@ $(document).ready(function ($) {
 	/*	Nivo Lightbox
 	/*----------------------------------------------------*/
 	
-	//$('.lightbox').nivoLightbox({
-	//	effect: 'fadeScale',
-	//	keyboardNav: true,
-	//	errorMessage: 'The requested content cannot be loaded. Please try again later.'
-	//});
+	$('.lightbox').nivoLightbox({
+		effect: 'fadeScale',
+		keyboardNav: true,
+		errorMessage: 'The requested content cannot be loaded. Please try again later.'
+	});
 	
 	
 	

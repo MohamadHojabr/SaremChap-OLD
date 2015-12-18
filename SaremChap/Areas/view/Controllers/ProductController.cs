@@ -20,5 +20,16 @@ namespace SaremChap.Areas.view.Controllers
             ViewBag.datenow = DateTime.Now.ToString("yyyy-MM-dd");
             return View(category);
         }
+
+        public ActionResult Service(int id)
+        {
+            var service = db.Products.Find(id);
+
+            var catId = service.ProductCategoryID;
+
+            ViewBag.RelatedProduct = db.Products.Where(p => p.ProductCategoryID == catId).ToList();
+
+            return View(service);
+        }
 	}
 }

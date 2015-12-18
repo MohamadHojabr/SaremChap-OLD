@@ -694,7 +694,15 @@ ul.social-list li:last-child a i {
 
 .dropdown li a:hover, .sup-dropdown li a:hover {
     background:#666;
-    color:#ebd2ff
+    color:#ebd2ff !important
+}
+
+.direction-right {
+    direction: rtl;
+}
+
+.direction-left {
+    direction: ltr;
 }
 
 
@@ -3054,6 +3062,11 @@ ul.icons-list li i {
 	content: "";
 }
 
+.description-block {
+    border: 1px solid #f1f1f1;
+    border-radius: 3px;
+    padding: 15px;
+}
 
 /*---- Isotope filtering ----*/
 .isotope-item {

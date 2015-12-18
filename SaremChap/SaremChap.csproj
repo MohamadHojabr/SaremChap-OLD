@@ -823,6 +823,7 @@
     <Content Include="Areas\PartialsView\Views\_ViewStart.cshtml" />
     <Content Include="Areas\PartialsView\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\PartialsView\Views\Partials\GalleriesInMenu.cshtml" />
+    <Content Include="Areas\view\Views\Product\Service.cshtml" />
     <None Include="Properties\PublishProfiles\SaremChap.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jHtmlArea-0.8.js" />
