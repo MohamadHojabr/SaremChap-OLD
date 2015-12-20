@@ -1,4 +1,6 @@
-﻿@model Domainclasses.Modes.ProductCategory
+﻿
+
+@model Domainclasses.Modes.ProductCategory
 <div class="call-action call-action-boxed call-action-style2 clearfix text-right">
     @using (Html.BeginForm("Create", "ProductCategory", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
@@ -27,7 +29,25 @@
 
 
 
-  
+              <div class="form-group" style="text-align:right">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row" id="optionField">
+                            <div class="col-md-10 input-group">
+
+                                @Html.TextBoxFor(model => model.Tags, new { @class = " form-control tags", id = "tags" })
+                                @Html.ValidationMessageFor(model => model.Tags)
+
+
+                            </div>
+                            <div class="col-md-2">
+                                <span>  کلید واژه  </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
 
 
@@ -125,5 +145,7 @@
     alert(xhr.responseText);
 });
     });
+
+    $('#tags').tagsInput({ width: 'auto' });
 
 </script>

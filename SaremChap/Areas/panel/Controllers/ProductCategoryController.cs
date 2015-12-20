@@ -113,7 +113,7 @@ namespace SaremChap.Areas.panel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductCategoryID,name,describtion,SuperCategory")] ProductCategory productcategory ,HttpPostedFileBase upload)
+        public ActionResult Create([Bind(Include = "ProductCategoryID,name,describtion,Tags,SuperCategory")] ProductCategory productcategory ,HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
@@ -165,7 +165,7 @@ namespace SaremChap.Areas.panel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="ProductCategoryID,name,imege,describtion,SuperCategory")] ProductCategory productcategory,HttpPostedFileBase upload)
+        public ActionResult Edit([Bind(Include="ProductCategoryID,name,imege,Tags,describtion,SuperCategory")] ProductCategory productcategory,HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {

@@ -24,7 +24,8 @@ namespace SaremChap
                     "~/Content/plugins/dropzone/dropzone.js",
                     "~/Content/plugins/jquery.validetta/validetta.min.js",
                     "~/Content/plugins/jquery.validetta/validettaLang-fa-IR.js",
-                    "~/Content/plugins/owl.carousel/owl-carousel/owl.carousel.min.js"
+                    "~/Content/plugins/owl.carousel/owl-carousel/owl.carousel.min.js",
+                    "~/Content/plugins/jQuery-Tags-Input-master/jquery.tagsinput.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/Front/js").Include(
@@ -43,6 +44,7 @@ namespace SaremChap
 
             bundles.Add(new StyleBundle("~/Content/common")
                 .Include(
+                "~/Content/plugins/jQuery-Tags-Input-master/jquery.tagsinput.css",
                     "~/Content/css/bootstrap.min.css",
                     "~/Content/css/style.css",
                     "~/Content/css/animate.css",

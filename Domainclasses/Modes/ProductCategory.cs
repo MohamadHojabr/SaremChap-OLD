@@ -21,6 +21,8 @@ namespace Domainclasses.Modes
         [Required(ErrorMessage = "متن مطلب وارد نشده است")]
         [AllowHtml]
         public string describtion { get; set; }
+        [DisplayName("کلید واژه")]
+        public string Tags { get; set; }
         public SuperCategory? SuperCategory { get; set; } 
         public virtual ICollection<Product>Product { get; set; }
         public virtual ICollection<ProductCategoryFiles> ProductCategoryFileses { get; set; }
