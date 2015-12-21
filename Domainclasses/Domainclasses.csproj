@@ -103,6 +103,10 @@
     <Compile Include="Migrations\201512201151533_tags.Designer.cs">
       <DependentUpon>201512201151533_tags.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512210540048_product tags.cs" />
+    <Compile Include="Migrations\201512210540048_product tags.Designer.cs">
+      <DependentUpon>201512210540048_product tags.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modes\Chapter.cs" />
     <Compile Include="Modes\CustomerInformation.cs" />
@@ -141,6 +145,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512201151533_tags.resx">
       <DependentUpon>201512201151533_tags.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512210540048_product tags.resx">
+      <DependentUpon>201512210540048_product tags.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

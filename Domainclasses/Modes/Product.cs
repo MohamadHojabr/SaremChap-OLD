@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Domainclasses.Modes
@@ -24,6 +20,9 @@ namespace Domainclasses.Modes
         [Required(ErrorMessage = "متن مطلب وارد نشده است")]
         [AllowHtml]
         public string describtion { get; set; }
+        [DisplayName("کلید واژه")]
+        public string Tags { get; set; }
+
         public virtual ICollection<Price> Price { get; set; }
         public virtual ICollection<ProductFiles> Files  { get; set; }
         public virtual Form Form { get; set; }

@@ -46,7 +46,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                @*<div class="col-md-4">
                     <div class="call-action call-action-boxed call-action-style3 clearfix">
                         <div class="row">
                             <div class="col-md-6">
@@ -58,7 +58,7 @@
                         </div>
 
                     </div>
-                </div>
+                </div>*@
             </div>
 
         </div>
@@ -501,9 +501,9 @@
     </div>
     
 </div>
-
+<input type="text" value=" " />
 <script>
-
+    var fileName = null;
     $(document).ready(function () {
         Dropzone.options.myAwesomeDropzone = { // The camelized version of the ID of the form element
             // The configuration we've talked about above
@@ -511,26 +511,36 @@
             previewsContainer: ".dropzone-previews",
             uploadMultiple: true,
             parallelUploads: 100,
-            maxFiles: 3,
+            maxFiles: 1,
             addRemoveLinks: true,
             clickable: true,
             accept: function (file, done) {
 
                 done();
             },
+            success: function (response) {
+                var x = JSON.parse(response.xhr.responseText);
+                fileName = x.Message;
+            },
             init: function () {
 
-                this.on("success", function (file) {
+                this.on("success", function (file, Message) {
                     var img_holder = "/Images/WallImages/OrderImage/";
                     var img_name = file.name;
                     var img_url = img_holder + img_name;
                     $("#img-url").attr("value", img_url);
 
-                    console.log($("#img-url").val());
+                    console.log($("#img-url").val() + Message);
                 });
 
-                this.on("addedfile", function (file) {
-                    //todo
+                this.on("removedfile", function (file) {
+                    $.ajax({
+                        url: '/FormGenerate/ShowForm/DeleteUploadedImage?fileName=' + fileName,
+
+                        success: function (result) {
+                            alert(result);
+                        }
+                    });
                 });
 
 
