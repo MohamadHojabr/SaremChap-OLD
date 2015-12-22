@@ -60,6 +60,24 @@
  
            </div>
 
+                          <div class="form-group" style="text-align:right">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row" id="optionField">
+                            <div class="col-md-10 input-group">
+
+                                @Html.TextBoxFor(model => model.Tags, new { @class = " form-control tags", id = "tags" })
+                                @Html.ValidationMessageFor(model => model.Tags)
+
+
+                            </div>
+                            <div class="col-md-2">
+                                <span>  کلید واژه  </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         <div class="form-group">
             <div class="col-md-12">
@@ -124,7 +142,9 @@
     $('input').attr('data-validetta', 'required');
     $('textarea').attr('data-validetta', 'required');
     $('select').attr('data-validetta', 'required');
-    $("select").addClass("form-control")
+    $("select").addClass("form-control");
+
+    $('#tags').tagsInput({ width: 'auto' });
 
 </script>
 

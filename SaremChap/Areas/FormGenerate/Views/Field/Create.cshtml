@@ -73,12 +73,12 @@
                 </div>
             </div>
             <hr />
-            <div class="form-group" style="text-align:right">
+            <div class="form-group" style="text-align: right">
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="row" id="finance" style="display:none">
+                        <div class="row" id="finance" style="display: none">
                             <div class="col-md-8">
-                                @Html.TextBoxFor(model => model.Finance, new { @class = " form-control", id = "finance" })
+                                @Html.TextBoxFor(model => model.Finance, new {@class = " form-control", id = "finance"})
                                 @Html.ValidationMessageFor(model => model.Finance)
                             </div>
                             <div class="col-md-4">
@@ -113,6 +113,132 @@
 
                 </div>
             </div>
+
+            <div class="dynamic-form">
+                <a id="add" href="#">Add</a>
+                |
+                <a id="remove" href="#">Remove</a>
+                |
+                <a id="reset" href="#">Reset</a>
+                <form>
+                    <div class="inputs">
+                        <div>
+                            <input class="field" type="text" value="1" name="dynamic[]">
+                        </div>
+                    </div>
+                    <input class="submit" type="button" value="Submit" name="submit">
+                </form>
+            </div>
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+
+                    var i = $('input').size() + 1;
+
+                    $('#add').click(function () {
+                        $('<div><input type="text" class="field" name="dynamic[]" value="' + i + '" /></div>').fadeIn('slow').appendTo('.inputs');
+                        i++;
+                    });
+
+                    $('#remove').click(function () {
+                        if (i > 1) {
+                            $('.field:last').remove();
+                            i--;
+                        }
+                    });
+
+                    $('#reset').click(function () {
+                        while (i > 2) {
+                            $('.field:last').remove();
+                            i--;
+                        }
+                    });
+
+                    // here's our click function for when the forms submitted
+
+                    $('.submit').click(function () {
+
+                        var answers = [];
+                        $.each($('.field'), function () {
+                            answers.push($(this).val());
+                        });
+
+                        if (answers.length == 0) {
+                            answers = "none";
+                        }
+                        var BODY = {
+                            "recipients": {
+                                "values": []
+                            },
+                            "subject": 'TitleOfSubject',
+                            "body": 'This is the message body.'
+                        }
+
+                        var values = [], names = answers;
+                        for (var ln = 0; ln < names.length; ln++) {
+                            var item1 = {
+                                "person": { "_path": "/people/" + names[ln] }
+                            };
+                            values.push(item1);
+                        }
+                        $.extend(BODY.recipients.values, values);
+                        console.log(BODY);
+                        alert(answers);
+
+                        return false;
+
+                    });
+
+                });
+            </script>
+
+            @*<script type="text/javascript">
+
+                var data = [];
+
+                $(function () {
+                    var addDiv = $('#addinput');
+                    var i = $('#addinput p').size() + 1;
+                    var nameInput = '<input type="text" class = "form-control" id="p_new_' + i + '" value="aaasasf" name="p_new_' + i + '" placeholder="نام " />';
+                    var valInput = '<input type="text"  class = "form-control" id="p_val_' + i + '" name="p_val_' + i + '"  placeholder="قیمت" />';
+                    var removeBtn = '<a href="#" id="remNew">Remove</a> '; 
+
+                    $('#addNew').on('click', function () {
+                        $('<p id="addContainer">'+
+                           nameInput +
+                           valInput +
+                           removeBtn
+                            +' </p>' ).appendTo(addDiv);
+                        i++;
+
+                        addDiv.each(function () {
+                            var id = $("#p_new_" + i).attr('value');
+                            data.push(id);
+                            console.log("add to" + data);
+                        });
+
+
+                        return false;
+                    });
+
+                    $('#remNew').live('click', function () {
+                       
+                        if (i > 2) {
+                            $(this).parents('#addContainer').remove();
+                            i--;
+                        }
+                        return false;
+                    });
+                });
+
+            </script>
+            <h2>Dynammically Add Another Input Box</h2>
+
+            <div id="addinput">
+                <p>
+                    <<input type="text" id="p_new" size="20" name="p_new" value="" placeholder="Input Value" /><a href="#" id="addNew">Add</a>
+                </p>
+            </div>*@
             <hr />
             <div class="form-group" style="text-align:right">
                 <div class="row">
@@ -149,27 +275,27 @@
 <script>
 
     $('#EffectivePrice').change(
-         function () {
-        if ($("#EffectivePrice").is(':checked')) {
-            $('#finance').show();
+        function () {
+            if ($("#EffectivePrice").is(':checked')) {
+                $('#finance').show();
         
-        } else {
-            $('#finance').hide();
-        }
-         });
+            } else {
+                $('#finance').hide();
+            }
+        });
 
     $('#fieldtype').change(
-    function () {
+        function () {
 
-        if ($(this).val() == 1) {
-            $('#optionField').show();
-        }
-        else if ($(this).val() == 7) {
-            $('#optionField').show();
-        } else {
-            $('#optionField').hide();
-        }
-    });
+            if ($(this).val() == 1) {
+                $('#optionField').show();
+            }
+            else if ($(this).val() == 7) {
+                $('#optionField').show();
+            } else {
+                $('#optionField').hide();
+            }
+        });
 
     $('#tags_1').tagsInput({ width: 'auto' });
 </script>

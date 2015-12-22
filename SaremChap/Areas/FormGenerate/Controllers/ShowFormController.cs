@@ -189,6 +189,7 @@ namespace SaremChap.Areas.FormGenerate.Controllers
 
         public ActionResult SaveUploadedImage()
         {
+            string fileName1 = null;
             bool isSavedSuccessfully = true;
             string fName = "";
             try
@@ -205,16 +206,16 @@ namespace SaremChap.Areas.FormGenerate.Controllers
 
                         string pathString = System.IO.Path.Combine(originalDirectory.ToString(), "OrderImage");
 
-                        var fileName1 = Path.GetFileName(file.FileName);
-
+                        fileName1 = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(file.FileName);
+                       
                         bool isExists = System.IO.Directory.Exists(pathString);
 
                         if (!isExists)
                             System.IO.Directory.CreateDirectory(pathString);
 
-                        var path = string.Format("{0}\\{1}", pathString, file.FileName);
+                        var path = string.Format("{0}\\{1}", pathString, fileName1);
                         file.SaveAs(path);
-
+                        ViewBag.filename = fileName1;
                     }
 
                 }
@@ -228,12 +229,25 @@ namespace SaremChap.Areas.FormGenerate.Controllers
 
             if (isSavedSuccessfully)
             {
-                return Json(new { Message = fName });
+                return Json(new { Message = fileName1 });
             }
             else
             {
                 return Json(new { Message = "Error in saving file" });
             }
+        }
+
+        public ActionResult DeleteUploadedImage(string fileName)
+        {
+            var originalDirectory = new DirectoryInfo(string.Format("{0}Images\\WallImages\\OrderImage", Server.MapPath(@"\")));
+
+            var oldPath = string.Format("{0}\\{1}", originalDirectory, fileName);
+
+            if (System.IO.File.Exists(oldPath))
+            {
+                System.IO.File.Delete(oldPath);
+            }
+            return Json(new { Message = "حذف با موفقیت انجام شد" });
         }
 
 	}
