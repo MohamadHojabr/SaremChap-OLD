@@ -1,0 +1,156 @@
+﻿@model Domainclasses.Modes.Product
+
+@{
+    ViewBag.Title = "Service";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <br />
+    <h1 class="text-right direction-right">@Model.name</h1>
+    <br />
+    <div class="row">
+        <div class="col-md-8">
+            <div class="description-block">
+                <h3 class="text-right direction-right"> توضیحات : </h3>
+                <br />
+                <p style="direction: rtl">@Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.describtion))</p>
+            </div>
+            <br />
+            <h3 class="text-right direction-right"> قیمت ها : </h3>
+
+            <table cellspacing="1" class="table table-striped text-center" style="margin-top: 20px">
+                <tr>
+                    @if (Model.Price.Count == 0)
+                    {
+                        <th style="text-align: center">
+                            <p>قیمتی ثبت نشده است</p>
+                        </th>
+                    }
+                    else
+                    {
+                        foreach (var price in Model.Price)
+                        {
+                            <th style="text-align: center">@price.neme</th>
+                        }
+
+                    }
+                </tr>
+                <tr>
+                    @foreach (var price in Model.Price)
+                    {
+                        <td style="background: #8f59d4; color: #f9f9f9; font-weight: bold">@price.value.ToString("0.#####")</td>
+
+                    }
+                </tr>
+            </table>
+
+        </div>
+        <div class="col-md-4">
+            @if (Model.Files.Count == 0)
+            {
+
+                <img class="img-thumbnail" src="~/Content/images/image-not-found.jpg" alt="sarem chap | چاپ صارم " />
+            }
+            else
+            {
+                foreach (var file in Model.Files)
+                {
+
+                    var url = string.Format("/images/Services/service/{0}", file.FileName);
+                    <div class="portfolio-item item">
+                        <div class="portfolio-border">
+                            <div class="portfolio-thumb">
+                                <a class="lightbox" data-lightbox-gallery="gallery1" href="@url" title="@Model.name">
+                                    <div class="thumb-overlay"><i class="fa fa-eye"></i></div>
+
+                                    <img src=@url alt="@file.FileName" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+            }
+
+            <a href="/FormGenerate/ShowForm/ShowForm/@Model.ProductID" class="btn-system border-btn btn-large btn-purple"> <i class="fa fa-shopping-cart"></i>  ثبت سفارش</a>
+
+        </div>
+
+    </div>
+</div>
+
+<div>
+    <hr />
+</div>
+
+<!-- Start Portfolio Section -->
+<div class="project">
+    <div class="container">
+        <!-- Start Recent Projects Carousel -->
+        <div class="recent-projects">
+            <h4 class="title" style="text-align: right; direction: rtl; margin-right: 80px"><span> از این گروه .... </span></h4>
+            <div id="relatedCarousel" class="projects-carousel touch-carousel">
+
+                @foreach (var p in ViewBag.RelatedProduct)
+                {
+                <div class="portfolio-item item">
+                    <div class="portfolio-border">
+                        <div class="portfolio-thumb">
+                            <a href="/View/Product/Service/@p.ProductID">
+                                <div class="thumb-overlay"><i class="fa fa-eye"></i></div>
+                                @if (p.Files.Count == 0)
+                                    {
+
+                                    <img class="lazyOwl" data-src="/Content/images/image-not-found.jpg" alt="sarem chap | چاپ صارم " />
+                                    }
+                                    else
+                                    {
+                                        foreach (var file in p.Files)
+                                        {
+
+                                            var url = string.Format("/images/Services/service/{0}", file.FileName);
+                                    <div>
+                                        <img class="lazyOwl" data-src="@url" alt="@file.FileName">
+                                    </div>
+                                        }
+
+                                    }
+
+                            </a>
+                        </div>
+                        <div class="portfolio-details">
+                            <a href="/View/Product/Service/@p.ProductID">
+                                <h4 class="text-right direction-right">@p.name</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                }
+
+
+            </div>
+        </div>
+        <!-- End Recent Projects Carousel -->
+    </div><!-- .container -->
+</div>
+<!-- End Portfolio Section -->
+
+<br />
+
+@section TagMeta{
+
+
+
+}
+@section ContentMeta{
+
+    @Model.describtion<text>.</text>
+
+}
+@section AuthorMeta{
+    گروه صنعتی چاپ صارم ارائه دهنده خدمات نوین چاپ
+}
