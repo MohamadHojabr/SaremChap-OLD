@@ -1,4 +1,5 @@
 ﻿@using Domainclasses.Modes
+@using Newtonsoft.Json
 
 @model IEnumerable<Domainclasses.Modes.Field>
 
@@ -336,15 +337,27 @@
                         <div class="form-group">
                             <input type="hidden" name="[@i].FieldType" value="@Model.ElementAt(i).FieldType" />
                             <input type="hidden" name="[@i].Id" value="@Model.ElementAt(i).Id" />
-                            <input type="hidden" name="[@i].FormId" value="@Model.ElementAt(i).FormId" />
-
+                            <input type="hidden" name="[@i].FormId" value="@Model.ElementAt(i).FormId"/>
+                            @{
+                    var result = new JsonResult
+                    {
+                        Data = JsonConvert.DeserializeObject(Model.ElementAt(i).Options)
+                    };
+                            }
+                            <script>
+                                var data = JSON.stringify(@result.Data);
+                                for (var i in data.length) {
+                                    $('<option value="'+data.items.name+'">2</option>').appendTo('#dropDown');
+                                }
+                            </script>
                             <div class="col-md-6"></div>
                             <div class="col-md-4">
-                                <select name="[@i].TitleEn" class="form-control" data-finance="@Model.ElementAt(i).Finance"  data-validetta="required">
-                                    @foreach (string word in Model.ElementAt(i).Options.Split(','))
+                                <select id="dropDown" name="[@i].TitleEn" class="form-control" data-finance="@Model.ElementAt(i).Finance" data-validetta="required">
+                                   
+                                    @*@foreach (string word in Model.ElementAt(i).Options.Split(','))
                                     {
                                         <option value="@word">@word</option>
-                                    }
+                                    }*@
                                 </select>
                             </div>
                             <label class="col-md-2 control-label text-right">@Model.ElementAt(i).TitleFa</label>
@@ -574,18 +587,18 @@
 
         $.ajax({
 
-            url: "/home/imageList",
-            contentType: 'application/html; charset=utf-8',
-            type: 'GET',
-            dataType: 'html'
+                url: "/home/imageList",
+                contentType: 'application/html; charset=utf-8',
+                type: 'GET',
+                dataType: 'html'
 
-        })
-                 .success(function (result) {
+            })
+            .success(function (result) {
 
-                     $('#imageList-container').html(result).fadeIn();
+                $('#imageList-container').html(result).fadeIn();
 
 
-                 })
+            })
     });
 
 
