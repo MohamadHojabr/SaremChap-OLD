@@ -59,7 +59,23 @@
 
             </div>
             <br />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row" id="optionField">
+                                <div class="col-md-10 input-group">
 
+                                    @Html.TextBoxFor(model => model.Tags, new { @class = " form-control tags", id = "tags" })
+                                    @Html.ValidationMessageFor(model => model.Tags)
+
+
+                                </div>
+                                <div class="col-md-2">
+                                    <span>  کلید واژه  </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            <br/>
             <div class="row">
                 <div class="col-md-12">
                     @Html.TextAreaFor(model => model.SubjectContent, new { @class = "form-controls", placeholder = "توضاحات", style = "text-align:right"})
@@ -154,6 +170,7 @@
     alert(xhr.responseText);
 });
     });
+    $('#tags').tagsInput({ width: 'auto' });
 
 </script>
 

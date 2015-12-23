@@ -58,7 +58,7 @@ namespace SaremChap.Areas.panel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="ChapterId,Name")] Chapter chapter)
+        public ActionResult Create([Bind(Include="ChapterId,Name,Tags")] Chapter chapter)
         {
             if (ModelState.IsValid)
             {
@@ -92,7 +92,7 @@ namespace SaremChap.Areas.panel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="ChapterId,Name")] Chapter chapter)
+        public ActionResult Edit([Bind(Include="ChapterId,Name,Tags")] Chapter chapter)
         {
             if (ModelState.IsValid)
             {

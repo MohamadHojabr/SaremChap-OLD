@@ -15,6 +15,9 @@ namespace Domainclasses.Modes
         [Required(ErrorMessage = "گروه خبر وارد نشده است")]
         [DisplayName("گروه خبر")]
         public string Name { get; set; }
+        [DisplayName("کلید واژه")]
+        public string  Tags { get; set; }
+
         public ICollection<Subject> Subject { get; set; }
     }
 }

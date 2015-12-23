@@ -72,10 +72,10 @@
                         <!-- Post Content -->
                         <div class="post-content">
                             <div class="post-type"><i class="fa fa-picture-o"></i></div>
-                            <h2 style="padding-right:50px"><a href="#">@item.SubjectLead</a></h2>
+                            <h2 style="padding-right:50px"><a href="/view/Subject/post/@item.SubjectId">@item.SubjectLead</a></h2>
                             <ul class="post-meta" style="padding-right:50px">
                                 <li>نوشته شده توسط : <a href="#">@item.Authors</a></li>
-                                <li> در تاریخ : @item.SubjectDate.ToString("dd/mm/yyyy")</li>
+                                <li> در تاریخ : @item.SubjectDate.ToString("dd. MM. yyyy")</li>
                                 <li>گروه : <a href="#">@item.Chapter.Name</a></li>
                                
                             </ul>
@@ -117,7 +117,7 @@
 
 
                     <!-- Tags Widget -->
-                    <div class="widget widget-tags">
+                    @*<div class="widget widget-tags">
                         <h4>Tags <span class="head-line"></span></h4>
                         <div class="tagcloud">
                             <a href="#">Portfolio</a>
@@ -132,7 +132,7 @@
                             <a href="#">Icons</a>
                             <a href="#">Google</a>
                         </div>
-                    </div>
+                    </div>*@
 
                 </div>
                 <!--End sidebar-->

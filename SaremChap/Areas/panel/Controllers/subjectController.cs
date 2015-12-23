@@ -103,7 +103,7 @@ namespace SaremChap.Areas.panel.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SubjectId,ChapterId,Authors,SubjectLead,SubjectContent,Status,SubjectDate")] Subject subject, HttpPostedFileBase upload)
+        public ActionResult Create([Bind(Include = "SubjectId,ChapterId,Authors,SubjectLead,SubjectContent,Status,SubjectDate,Tags")] Subject subject, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
@@ -155,7 +155,7 @@ namespace SaremChap.Areas.panel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SubjectId,ChapterId,Authors,SubjectLead,SubjectContent,Status,SubjectDate")] Subject subject, HttpPostedFileBase upload)
+        public ActionResult Edit([Bind(Include = "SubjectId,ChapterId,Authors,SubjectLead,SubjectContent,Status,SubjectDate,Tags")] Subject subject, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {

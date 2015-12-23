@@ -8,7 +8,7 @@
 
         <li>
             <div class="widget-thumb">
-                <a href="#">
+                <a href="/view/Subject/post/@item.SubjectId">
                     @if (item.SubjectFiles.Count == 0)
                     {
 
@@ -31,8 +31,8 @@
                 </a>
             </div>
             <div class="widget-content">
-                <h5><a href="#">@item.SubjectLead</a></h5>
-                <span>@item.SubjectDate.ToString("dd/mm/yyyy")</span>
+                <h5><a href="/view/Subject/post/@item.SubjectId">@item.SubjectLead</a></h5>
+                <span>@item.SubjectDate.ToString("dd. MM. yyyy")</span>
             </div>
             <div class="clearfix"></div>
         </li>  

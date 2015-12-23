@@ -107,6 +107,14 @@
     <Compile Include="Migrations\201512210540048_product tags.Designer.cs">
       <DependentUpon>201512210540048_product tags.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512231430384_df.cs" />
+    <Compile Include="Migrations\201512231430384_df.Designer.cs">
+      <DependentUpon>201512231430384_df.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512231439591_bd.cs" />
+    <Compile Include="Migrations\201512231439591_bd.Designer.cs">
+      <DependentUpon>201512231439591_bd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modes\Chapter.cs" />
     <Compile Include="Modes\CustomerInformation.cs" />
@@ -148,6 +156,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512210540048_product tags.resx">
       <DependentUpon>201512210540048_product tags.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512231430384_df.resx">
+      <DependentUpon>201512231430384_df.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512231439591_bd.resx">
+      <DependentUpon>201512231439591_bd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

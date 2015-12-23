@@ -33,6 +33,9 @@ namespace Domainclasses.Modes
         [DisplayName("تاریخ مطلب")]
 
         public DateTime SubjectDate { get; set; }
+        [DisplayName("کلید واژه")]
+        public string Tags { get; set; }
+
         public virtual Chapter Chapter { get; set; }
         public virtual ICollection<SubjectFiles> SubjectFiles { get; set; }
     }
