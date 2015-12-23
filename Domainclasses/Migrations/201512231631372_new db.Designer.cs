@@ -7,13 +7,13 @@ namespace Domainclasses.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.0.0-20911")]
-    public sealed partial class modifygelleryitem : IMigrationMetadata
+    public sealed partial class newdb : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(modifygelleryitem));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(newdb));
         
         string IMigrationMetadata.Id
         {
-            get { return "201512181726318_modify gellery item"; }
+            get { return "201512231631372_new db"; }
         }
         
         string IMigrationMetadata.Source

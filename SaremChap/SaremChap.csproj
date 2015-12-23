@@ -711,6 +711,8 @@
     <Content Include="Images\WallImages\imagepath\7.png" />
     <Content Include="Images\WallImages\imagepath\8.png" />
     <Content Include="Images\WallImages\imagepath\9.png" />
+    <Content Include="Images\WallImages\pageimages\Fingerprint.png" />
+    <Content Include="Images\WallImages\pageimages\Logo.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\view\Views\web.config" />
@@ -844,6 +846,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Sitemap.xml" />
+    <Content Include="sitemap\Sitemap.xml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

@@ -87,33 +87,9 @@
     <Compile Include="Context\SaremContext.cs" />
     <Compile Include="Enums\FileType.cs" />
     <Compile Include="Enums\SourceType.cs" />
-    <Compile Include="Migrations\201512041149544_product category files.cs" />
-    <Compile Include="Migrations\201512041149544_product category files.Designer.cs">
-      <DependentUpon>201512041149544_product category files.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201512111741580_add subject files.cs" />
-    <Compile Include="Migrations\201512111741580_add subject files.Designer.cs">
-      <DependentUpon>201512111741580_add subject files.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201512181726318_modify gellery item.cs" />
-    <Compile Include="Migrations\201512181726318_modify gellery item.Designer.cs">
-      <DependentUpon>201512181726318_modify gellery item.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201512201151533_tags.cs" />
-    <Compile Include="Migrations\201512201151533_tags.Designer.cs">
-      <DependentUpon>201512201151533_tags.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201512210540048_product tags.cs" />
-    <Compile Include="Migrations\201512210540048_product tags.Designer.cs">
-      <DependentUpon>201512210540048_product tags.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201512231430384_df.cs" />
-    <Compile Include="Migrations\201512231430384_df.Designer.cs">
-      <DependentUpon>201512231430384_df.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201512231439591_bd.cs" />
-    <Compile Include="Migrations\201512231439591_bd.Designer.cs">
-      <DependentUpon>201512231439591_bd.cs</DependentUpon>
+    <Compile Include="Migrations\201512231631372_new db.cs" />
+    <Compile Include="Migrations\201512231631372_new db.Designer.cs">
+      <DependentUpon>201512231631372_new db.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modes\Chapter.cs" />
@@ -142,26 +118,8 @@
     <Folder Include="ViewModel\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201512041149544_product category files.resx">
-      <DependentUpon>201512041149544_product category files.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201512111741580_add subject files.resx">
-      <DependentUpon>201512111741580_add subject files.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201512181726318_modify gellery item.resx">
-      <DependentUpon>201512181726318_modify gellery item.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201512201151533_tags.resx">
-      <DependentUpon>201512201151533_tags.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201512210540048_product tags.resx">
-      <DependentUpon>201512210540048_product tags.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201512231430384_df.resx">
-      <DependentUpon>201512231430384_df.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201512231439591_bd.resx">
-      <DependentUpon>201512231439591_bd.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201512231631372_new db.resx">
+      <DependentUpon>201512231631372_new db.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

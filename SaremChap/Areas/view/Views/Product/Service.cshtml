@@ -100,7 +100,7 @@
                     <div class="portfolio-border">
                         <div class="portfolio-thumb">
                             <a href="/View/Product/Service/@p.ProductID">
-                                <div class="thumb-overlay"><i class="fa fa-eye"></i></div>
+                                <div class="thumb-overlay"><i class="fa fa-link"></i></div>
                                 @if (p.Files.Count == 0)
                                     {
 
@@ -143,12 +143,12 @@
 
 @section TagMeta{
 
-
+    @Model.Tags
 
 }
 @section ContentMeta{
 
-    @Model.describtion<text>.</text>
+    @Model.name
 
 }
 @section AuthorMeta{

@@ -10,6 +10,7 @@ using Domainclasses.Context;
 using Domainclasses.Enums;
 using Domainclasses.Modes;
 using PagedList;
+using SaremChap.Models;
 using File = Domainclasses.Modes.ProductFiles;
 
 
@@ -124,6 +125,9 @@ namespace SaremChap.Areas.panel.Controllers
                 
                 db.Products.Add(product);
                 db.SaveChanges();
+                updateSiteMap updateSiteMap = new updateSiteMap();
+                updateSiteMap.UpdateSiteMap("http://www.saremchap.ir/View/Product/Service/" + product.ProductID, "add");
+
                 return RedirectToAction("Index");
             }
 
@@ -185,6 +189,9 @@ namespace SaremChap.Areas.panel.Controllers
                 
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
+                updateSiteMap updateSiteMap = new updateSiteMap();
+                updateSiteMap.UpdateSiteMap("http://www.saremchap.ir/View/Product/Service/" + product.ProductID, "add");
+
                 return RedirectToAction("Index");
             }
             ViewBag.ProductCategoryID = new SelectList(db.ProductCategories, "ProductCategoryID", "name", product.ProductCategoryID);
@@ -225,6 +232,9 @@ namespace SaremChap.Areas.panel.Controllers
             Product product = db.Products.Find(id);
             db.Products.Remove(product);
             db.SaveChanges();
+            updateSiteMap updateSiteMap = new updateSiteMap();
+            updateSiteMap.UpdateSiteMap("http://www.saremchap.ir/View/Product/Service/" + product.ProductID, "delete");
+
             return RedirectToAction("Index");
         }
 
