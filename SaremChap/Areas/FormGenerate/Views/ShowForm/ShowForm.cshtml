@@ -1,19 +1,15 @@
 ﻿@using Domainclasses.Modes
 @using Newtonsoft.Json
-
 @model IEnumerable<Domainclasses.Modes.Field>
-
 @{
-    ViewBag.Title =  ViewBag.form.Fa_Title;
+    ViewBag.Title = ViewBag.form.Fa_Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
-
 <script type="text/javascript">
     var plusPrice = 0;
 
 </script>
-
 
 <div class="form-horizontal">
     <div class="container">
@@ -43,25 +39,23 @@
                             <div class="col-md-6">
                                 <h3 style="color:#ffffff">قیمت واحد</h3>
                             </div>
-
                         </div>
                     </div>
                 </div>
                 @*<div class="col-md-4">
-                    <div class="call-action call-action-boxed call-action-style3 clearfix">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h4 class="text-right" style="color:#ffffff">@ViewBag.RelatedProduct.name</h4>
+                        <div class="call-action call-action-boxed call-action-style3 clearfix">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4 class="text-right" style="color:#ffffff">@ViewBag.RelatedProduct.name</h4>
+                                </div>
+                                <div class="col-md-6">
+                                    <img src="@ViewBag.RelatedProduct.imege" class="img-thumbnail" width="150" />
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <img src="@ViewBag.RelatedProduct.imege" class="img-thumbnail" width="150" />
-                            </div>
+
                         </div>
-
-                    </div>
-                </div>*@
+                    </div>*@
             </div>
-
         </div>
         <br />
         @using (Html.BeginForm())
@@ -91,7 +85,6 @@
                                 {
                                     require = "";
                                 }
-
                                 @if (Model.ElementAt(i).DisabledField)
                                 {
                                     disable = "disabled";
@@ -105,10 +98,9 @@
                                     {*@
                                 <input id="finance" type="hidden" value="@Model.ElementAt(i).Finance" />
                                 <div class="col-md-4">
-                                    <input type="text" oninput="inputFunction()" id="number" name="[@i].TitleEn" class="form-control"  data-validetta="number,@require" data-finance="@Model.ElementAt(i).Finance" @disable  value="0" />
+                                    <input type="text" oninput="inputFunction()" id="number" name="[@i].TitleEn" class="form-control" data-validetta="number,@require" data-finance="@Model.ElementAt(i).Finance" @disable value="0" />
                                 </div>
                                 <label class="col-md-2 control-label text-right">@Model.ElementAt(i).TitleFa</label>
-
                                 <script>
                                     function inputFunction() {
 
@@ -120,7 +112,7 @@
                     </div>
                     <hr />
                 }
-                
+
                 if (Model.ElementAt(i).FieldType == FieldType.Geocaching)
                 {
                     string require = "";
@@ -139,7 +131,6 @@
                                 {
                                     require = "";
                                 }
-
                                 @if (Model.ElementAt(i).DisabledField)
                                 {
                                     disable = "disabled";
@@ -149,7 +140,7 @@
                                     disable = "";
                                 }
                                 <div class="col-md-6"></div>
-                              
+
                                 <input id="finance" type="hidden" value="@Model.ElementAt(i).Finance" />
                                 <div class="col-md-4">
                                     <div class="input-group">
@@ -166,21 +157,19 @@
                                     <br />
                                     <div class="input-group">
                                         <div class="input-group-addon">متر</div>
-                                        <input type="text" oninput="GeocachingFunction()" id="geocaching" name="[@i].TitleEn" class="form-control" @disable  data-validetta="number,@require" value="0" />
+                                        <input type="text" oninput="GeocachingFunction()" id="geocaching" name="[@i].TitleEn" class="form-control" @disable data-validetta="number,@require" value="0" />
                                         <div class="input-group-addon">مساحت کل</div>
                                     </div>
-
                                 </div>
                                 <label class="col-md-2 control-label text-right">@Model.ElementAt(i).TitleFa</label>
-
                                 <script>
                                     function GeocachingFunction() {
-                                        var area_width = $("#area_width").val()/100;
-                                        var area_length = $("#area_length").val()/100;
+                                        var area_width = $("#area_width").val() / 100;
+                                        var area_length = $("#area_length").val() / 100;
                                         var geocaching = area_width * area_length;
                                         $("#geocaching").attr("value", geocaching);
                                         UpdatePrice()
-                                       
+
                                     }
                                 </script>
                             </text>
@@ -208,7 +197,6 @@
                                 {
                                     require = "";
                                 }
-
                                 @if (Model.ElementAt(i).DisabledField)
                                 {
                                     disable = "disabled";
@@ -217,13 +205,11 @@
                                 {
                                     disable = "";
                                 }
-
                                 <div class="col-md-6"></div>
                                 <div class="col-md-4">
-                                    <input type="text" oninput="inputFunction()" id="txt" name="[@i].TitleEn" class="form-control" data-finance="@Model.ElementAt(i).Finance" @disable  data-validetta="@require" />
+                                    <input type="text" oninput="inputFunction()" id="txt" name="[@i].TitleEn" class="form-control" data-finance="@Model.ElementAt(i).Finance" @disable data-validetta="@require" />
                                 </div>
                                 <label class="col-md-2 control-label text-right">@Model.ElementAt(i).TitleFa</label>
-
                             </text>
                         }
                     </div>
@@ -248,7 +234,6 @@
                                 require = "";
 
                             }
-
                             @if (Model.ElementAt(i).DisabledField)
                             {
                                 disable = "disabled";
@@ -262,15 +247,13 @@
                             <div class="col-md-4">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <input type="checkbox" name="[@i].TitleEn" id="@i@Model.ElementAt(i).FieldType" class="form-control" data-finance="@Model.ElementAt(i).Finance"  data-validetta="@require" @disable />
+                                        <input type="checkbox" name="[@i].TitleEn" id="@i@Model.ElementAt(i).FieldType" class="form-control" data-finance="@Model.ElementAt(i).Finance" data-validetta="@require" @disable />
                                     </div>
                                     <div class="col-md-6 text-right">
                                         @Model.ElementAt(i).TitleFa
                                     </div>
-
                                 </div>
                             </div>
-
                         </div>
                         <hr />
                         <script type="text/javascript">
@@ -298,34 +281,31 @@
 
                 else if (Model.ElementAt(i).FieldType == FieldType.Radio)
                 {
-                    
+
                     <text>
                         <div class="form-group">
                             <input type="hidden" name="[@i].FieldType" value="@Model.ElementAt(i).FieldType" />
                             <input type="hidden" name="[@i].Id" value="@Model.ElementAt(i).Id" />
                             <input type="hidden" name="[@i].FormId" value="@Model.ElementAt(i).FormId" />
-                            
-                                
-                                    <div class="col-md-6"></div>
-                                    <div class="col-md-4" style="background:#e2e2e2; border-radius:3px; align-content:stretch">
-                                        @foreach (string word in Model.ElementAt(i).Options.Split(','))
-                                        {
-                                            <label class="radio-inline" style="float:right">
-                                                @word
-                                                <input type="radio" name="[@i].TitleEn" class="form-control" data-finance="@Model.ElementAt(i).Finance" value="@word" data-validetta="required">
-                                            </label>
-                                        }
-                                    </div>
-                                    <div class="col-md-2">
-                                        <p class="text-right">@Model.ElementAt(i).TitleFa</p>
-                                    </div>
 
-                                
-                            
+
+                            <div class="col-md-6"></div>
+                            <div class="col-md-4" style="background:#e2e2e2; border-radius:3px; align-content:stretch">
+                                @foreach (string word in Model.ElementAt(i).Options.Split(','))
+                                {
+                                    <label class="radio-inline" style="float:right">
+                                        @word
+                                        <input type="radio" name="[@i].TitleEn" class="form-control" data-finance="@Model.ElementAt(i).Finance" value="@word" data-validetta="required">
+                                    </label>
+                                }
+                            </div>
+                            <div class="col-md-2">
+                                <p class="text-right">@Model.ElementAt(i).TitleFa</p>
+                            </div>
+
+
                         </div>
-
-        <hr />
-
+                        <hr />
                     </text>
 
                 }
@@ -333,37 +313,44 @@
                 else if (Model.ElementAt(i).FieldType == FieldType.Dropdown)
                 {
                     <text>
-
                         <div class="form-group">
                             <input type="hidden" name="[@i].FieldType" value="@Model.ElementAt(i).FieldType" />
                             <input type="hidden" name="[@i].Id" value="@Model.ElementAt(i).Id" />
-                            <input type="hidden" name="[@i].FormId" value="@Model.ElementAt(i).FormId"/>
-                            @{
-                    var result = new JsonResult
-                    {
-                        Data = JsonConvert.DeserializeObject(Model.ElementAt(i).Options)
-                    };
-                            }
-                            <script>
-                                var data = JSON.stringify(@result.Data);
-                                for (var i in data.length) {
-                                    $('<option value="'+data.items.name+'">2</option>').appendTo('#dropDown');
-                                }
-                            </script>
+                            <input type="hidden" name="[@i].FormId" value="@Model.ElementAt(i).FormId" />
                             <div class="col-md-6"></div>
                             <div class="col-md-4">
-                                <select id="dropDown" name="[@i].TitleEn" class="form-control" data-finance="@Model.ElementAt(i).Finance" data-validetta="required">
-                                   
-                                    @*@foreach (string word in Model.ElementAt(i).Options.Split(','))
-                                    {
-                                        <option value="@word">@word</option>
-                                    }*@
-                                </select>
+                                <select id="dropDown" name="[@i].TitleEn" class="form-control text-right" data-validetta="required"></select>
                             </div>
                             <label class="col-md-2 control-label text-right">@Model.ElementAt(i).TitleFa</label>
-
                         </div>
                         <hr />
+                        <script>
+
+    storejson = getJSonObject("@Model.ElementAt(i).Options");
+    function getJSonObject(value) {
+        return $.parseJSON(value.replace(/&quot;/ig, '"'));
+    }
+
+    for (var i in storejson.items) {
+        console.log(storejson.items[i].name);
+        var option = "<option class='text-right' data-finance='" + storejson.items[i].type + "' value='" + storejson.items[i].name + "'>" + storejson.items[i].name + "</option>"
+        document.getElementById('dropDown').innerHTML += option;
+    }
+
+    var finance = 0;
+
+    $('#dropDown option').click(function(e) {
+        e.preventDefault();
+            plusPrice = plusPrice - finance;
+            finance = $('#dropDown option').attr("data-finance");
+            var moha = $("#selectId option:selected").val();
+            console.log(moha)
+            plusPrice = plusPrice + parseInt(finance);
+            UpdatePrice();
+    });
+
+
+                        </script>
 
                     </text>
 
@@ -376,16 +363,13 @@
                             <input type="hidden" name="[@i].FieldType" value="@Model.ElementAt(i).FieldType" />
                             <input type="hidden" name="[@i].Id" value="@Model.ElementAt(i).Id" />
                             <input type="hidden" name="[@i].FormId" value="@Model.ElementAt(i).FormId" />
-
                             <div class="col-md-6"></div>
                             <div class="col-md-4">
-                                <textarea name="[@i].TitleEn" class="form-control" rows="3"  data-validetta="required"></textarea>
+                                <textarea name="[@i].TitleEn" class="form-control" rows="3" data-validetta="required"></textarea>
                             </div>
                             <label class="col-md-2 control-label text-right">@Model.ElementAt(i).TitleFa</label>
-
                         </div>
                         <hr />
-
                     </text>
 
                 }
@@ -397,23 +381,18 @@
                             <input type="hidden" name="[@i].FieldType" value="@Model.ElementAt(i).FieldType" />
                             <input type="hidden" name="[@i].Id" value="@Model.ElementAt(i).Id" />
                             <input type="hidden" name="[@i].FormId" value="@Model.ElementAt(i).FormId" />
-
                             <div class="col-md-6"></div>
                             <div class="col-md-4">
                                 <select name="[@i].TitleEn" id="dropdownID" onchange="ShippingPrice()" class="form-control text-right" data-finance="@Model.ElementAt(i).Finance" data-validetta="required" style="direction: rtl">
-
                                     <option value="15500">پست پیشتاز : برای شهرستان ( 1 عدد 15500 تومان و برای هر عدد اضافه 1200 تومان اضافه شود )</option>
                                     <option value="0">پیک : در تهران ( هزینه بصورت جدا گانه توسط پیک در محل از مشتری دریافت میشود )</option>
                                     <option value="0">باربری : برای شهرستان ( بصورت پس کرایه )</option>
                                     <option value="0">حضوری </option>
-
                                 </select>
                             </div>
                             <label class="col-md-2 control-label text-right">@Model.ElementAt(i).TitleFa</label>
-
                         </div>
                         <hr />
-
                     </text>
 
                 }
@@ -421,47 +400,37 @@
                 else if (Model.ElementAt(i).FieldType == FieldType.Image)
                 {
                     <text>
-
                         <div class="form-group">
                             <input type="hidden" name="[@i].FieldType" value="@Model.ElementAt(i).FieldType" />
                             <input type="hidden" name="[@i].Id" value="@Model.ElementAt(i).Id" />
                             <input type="hidden" name="[@i].FormId" value="@Model.ElementAt(i).FormId" />
-
 
                             <div class="col-md-10">
                                 <div class="dropzone dropzone-previews" id="my-awesome-dropzone"></div>
                                 <input type="hidden" id="img-url" name="[@i].TitleEn" class="form-control" value="" data-validetta="required">
-
                             </div>
                             <label class="col-md-2 control-label text-right">@Model.ElementAt(i).TitleFa</label>
-
                         </div>
                         <hr />
-
                     </text>
 
                 }
-                
-                                else if (Model.ElementAt(i).FieldType == FieldType.TotalPrice)
+
+                else if (Model.ElementAt(i).FieldType == FieldType.TotalPrice)
                 {
                     <text>
-
                         <div class="form-group">
                             <input type="hidden" name="[@i].FieldType" value="@Model.ElementAt(i).FieldType" />
                             <input type="hidden" name="[@i].Id" value="@Model.ElementAt(i).Id" />
                             <input type="hidden" name="[@i].FormId" value="@Model.ElementAt(i).FormId" />
 
-
                             <div class="col-md-10">
-                                
-                                <input type="hidden" id="total_price" name="[@i].TitleEn" value="0">
 
+                                <input type="hidden" id="total_price" name="[@i].TitleEn" value="0">
                             </div>
                             <label class="col-md-2 control-label text-right">@Model.ElementAt(i).TitleFa</label>
-
                         </div>
                         <hr />
-
                     </text>
 
                 }
@@ -500,7 +469,6 @@
                                 <h3 style="color:#ffffff">جمع هزینه</h3>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -512,7 +480,7 @@
             </div>
         }
     </div>
-    
+
 </div>
 <input type="text" value=" " />
 <script>
@@ -587,12 +555,12 @@
 
         $.ajax({
 
-                url: "/home/imageList",
-                contentType: 'application/html; charset=utf-8',
-                type: 'GET',
-                dataType: 'html'
+            url: "/home/imageList",
+            contentType: 'application/html; charset=utf-8',
+            type: 'GET',
+            dataType: 'html'
 
-            })
+        })
             .success(function (result) {
 
                 $('#imageList-container').html(result).fadeIn();
@@ -605,8 +573,6 @@
 
 
 </script>
-
-
 
 <script type="text/javascript">
 
@@ -653,7 +619,7 @@
         $('#singlePrice').text(sp)
         var total = sp * get_Number;
         $('#totalPrice').text(total);
-        
+
 
         FinalPrice();
     }
@@ -689,22 +655,17 @@
         color: white;
     }
 </style>
-
 @section TagMeta{
 
-
     چاپ صارم چاپ روی انواع سطوح
 
 
 
 }
-
 @section ContentMeta{
-
     چاپ صارم چاپ روی انواع سطوح
 
 }
-
 @section AuthorMeta{
     گروه صنعتی چاپ صارم ارائه دهنده خدمات نوین چاپ
 }
