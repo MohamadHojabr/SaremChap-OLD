@@ -42,19 +42,35 @@
                         </div>
                     </div>
                 </div>
-                @*<div class="col-md-4">
-                        <div class="call-action call-action-boxed call-action-style3 clearfix">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h4 class="text-right" style="color:#ffffff">@ViewBag.RelatedProduct.name</h4>
-                                </div>
-                                <div class="col-md-6">
-                                    <img src="@ViewBag.RelatedProduct.imege" class="img-thumbnail" width="150" />
-                                </div>
+                <div class="col-md-4">
+                    <div class="call-action call-action-boxed call-action-style3 clearfix">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="text-right" style="color:#ffffff">@ViewBag.RelatedProduct.name</h4>
                             </div>
+                            <div class="col-md-6">
+                                @if (ViewBag.RelatedProduct.Files.Count == 0)
+                                {
 
+                                    <img width="100" class="img-thumbnail" src="~/Content/images/image-not-found.jpg" alt="sarem chap | چاپ صارم " />
+                                }
+                                else
+                                {
+                                    foreach (var file in ViewBag.RelatedProduct.Files)
+                                    {
+
+                                        var url = string.Format("/images/Services/service/{0}", file.FileName);
+                                        <div>
+                                            <img width="100" class="img-thumbnail" src=@url alt="@file.FileName" />
+                                        </div>
+                                    }
+
+                                }
+                            </div>
                         </div>
-                    </div>*@
+
+                    </div>
+                </div>
             </div>
         </div>
         <br />
@@ -290,14 +306,8 @@
 
 
                             <div class="col-md-6"></div>
-                            <div class="col-md-4" style="background:#e2e2e2; border-radius:3px; align-content:stretch">
-                                @foreach (string word in Model.ElementAt(i).Options.Split(','))
-                                {
-                                    <label class="radio-inline" style="float:right">
-                                        @word
-                                        <input type="radio" name="[@i].TitleEn" class="form-control" data-finance="@Model.ElementAt(i).Finance" value="@word" data-validetta="required">
-                                    </label>
-                                }
+                            <div class="col-md-4" id="radioContainer" style="background:#e2e2e2; border-radius:3px; align-content:stretch">
+
                             </div>
                             <div class="col-md-2">
                                 <p class="text-right">@Model.ElementAt(i).TitleFa</p>
@@ -306,6 +316,31 @@
 
                         </div>
                         <hr />
+                        <script>
+
+                            storejson = getJSonObject("@Model.ElementAt(i).Options");
+                            function getJSonObject(value) {
+                                return $.parseJSON(value.replace(/&quot;/ig, '"'));
+                            }
+
+                            for (var i in storejson.items) {
+                                console.log(storejson.items[i].name);
+                                var option = "<label class=\"radio-inline\" style=\"float:right\"><input type=\"radio\" name=\"radioItem\" class='text-right' data-finance='" + storejson.items[i].type + "' value='" + storejson.items[i].name + "'/>" + storejson.items[i].name + "</label>";
+                                document.getElementById('radioContainer').innerHTML += option;
+                            }
+
+                            var finance = 0;
+
+                            $('#radioContainer input').click(function () {
+                                plusPrice = plusPrice - finance;
+                                finance = $('input[name=radioItem]:checked').attr("data-finance");
+                                plusPrice = plusPrice + parseInt(finance);
+                                UpdatePrice();
+                            });
+
+
+                        </script>
+
                     </text>
 
                 }
@@ -319,35 +354,37 @@
                             <input type="hidden" name="[@i].FormId" value="@Model.ElementAt(i).FormId" />
                             <div class="col-md-6"></div>
                             <div class="col-md-4">
-                                <select id="dropDown" name="[@i].TitleEn" class="form-control text-right" data-validetta="required"></select>
+                                <select id="dropDown" name="[@i].TitleEn" class="form-control text-right" data-validetta="required">
+                                    <option value="0" name="[@i].TitleEn" class='text-right' data-finance='0'>--انتخاب کنید--</option>
+                                </select>
                             </div>
                             <label class="col-md-2 control-label text-right">@Model.ElementAt(i).TitleFa</label>
                         </div>
                         <hr />
                         <script>
 
-    storejson = getJSonObject("@Model.ElementAt(i).Options");
-    function getJSonObject(value) {
-        return $.parseJSON(value.replace(/&quot;/ig, '"'));
-    }
+                            storejson = getJSonObject("@Model.ElementAt(i).Options");
+                            function getJSonObject(value) {
+                                return $.parseJSON(value.replace(/&quot;/ig, '"'));
+                            }
 
-    for (var i in storejson.items) {
-        console.log(storejson.items[i].name);
-        var option = "<option class='text-right' data-finance='" + storejson.items[i].type + "' value='" + storejson.items[i].name + "'>" + storejson.items[i].name + "</option>"
-        document.getElementById('dropDown').innerHTML += option;
-    }
+                            for (var i in storejson.items) {
+                                console.log(storejson.items[i].name);
+                                var option = "<option class='text-right' data-finance='" + storejson.items[i].type + "' value='" + storejson.items[i].name + "'>" + storejson.items[i].name + "</option>";
+                                document.getElementById('dropDown').innerHTML += option;
+                            }
 
-    var finance = 0;
+                            var finance = 0;
 
-    $('#dropDown option').click(function(e) {
-        e.preventDefault();
-            plusPrice = plusPrice - finance;
-            finance = $('#dropDown option').attr("data-finance");
-            var moha = $("#selectId option:selected").val();
-            console.log(moha)
-            plusPrice = plusPrice + parseInt(finance);
-            UpdatePrice();
-    });
+                            $('#dropDown option').click(function () {
+                                var x = document.getElementById("dropDown").selectedIndex;
+                                var y = document.getElementById("dropDown").options;
+                                plusPrice = plusPrice - finance;
+                                finance = y[x].getAttribute("data-finance");
+                                plusPrice = plusPrice + parseInt(finance);
+                                UpdatePrice();
+                                console.log("Index: " + y[x].index + " is " + y[x].text + "and finance is" + y[x].getAttribute("data-finance"));
+                            });
 
 
                         </script>

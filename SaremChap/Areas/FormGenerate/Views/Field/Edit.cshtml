@@ -116,34 +116,118 @@
                 </div>
             </div>
             <hr />
-            <div class="form-group" style="text-align:right">
+            <div class="form-group" style="text-align: right">
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="row" id="optionField" style="display:none">
+
+                        <div class="row" id="optionField" style="display: none">
                             <div class="col-md-8 input-group">
+                                <div class="dynamic-form">
+                                    <a id="add" href="#">اضافه</a>
+                                    |
+                                    <a id="remove" href="#">حذف</a>
+                                    |
+                                    <div class="inputs">
+                                        <div class="row">
+                                            <div class="col-md-6" id="valueContainer">
+                                            </div>
+                                            <div class="col-md-6" id="nameContainer">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input class="submit" type="button" value="اضافه کردن به فیلد" name="submit">
 
-                                @Html.TextBoxFor(model => model.Options, new { @class = " form-control tags", id = "tags_1" })
-                                @Html.ValidationMessageFor(model => model.Options)
-
-
+                                </div>
+                                <input name="Options" id="Options" type="hidden"/>
                             </div>
                             <div class="col-md-4">
-                                <span>  Options  </span>
+                                <p class="text-right direction-right alert-warning" style="padding: 3px">
+                                    توجه : پس از اضافه کردن نام ومقدار فیلد مورد نظر حتما دکمه ((اضافه به فیلد))را بزنید
+                                </p>
                             </div>
-
                         </div>
                     </div>
                     <div class="col-md-6">
                     </div>
 
-
                 </div>
             </div>
-            <div class="form-group" style="text-align:right">
+            <div class="form-group" style="text-align: right">
                 <div class="col-md-12">
-                    <input type="submit" value=" اعمال تغییرات" class="submitclick" />
+                    <input type="submit" value=" اعمال تغییرات" class="submitclick"/>
                 </div>
             </div>
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+
+                    var x = document.getElementById("fieldtype").selectedIndex;
+                    var y = document.getElementById("fieldtype").options;
+                    var storejson;
+                    var iterate = 0;
+                    if (y[x].value == 1 || y[x].value == 7) {
+                        $('#optionField').show();
+                        function getJSonObject(value) {
+                            return $.parseJSON(value.replace(/&quot;/ig, '"'));
+                        }
+
+                        storejson = getJSonObject("@Model.Options");
+                        console.log(storejson)
+                        iterate = storejson.items.length;
+                        for (var i in storejson.items) {
+                            $('<input id="fieldValue' + storejson.items[i].id + '" class="form-control text-right fieldValue" placeholder="مقدار" type="number" value="' + storejson.items[i].type + '" name="dynamic[]">').fadeIn('slow').appendTo('.inputs .row #valueContainer');
+                            $('<input id="fieldName' + storejson.items[i].id + '" class="form-control text-right fieldName" placeholder="نام" type="text" value="' + storejson.items[i].name + '" name="dynamic[]">').fadeIn('slow').appendTo('.inputs .row #nameContainer');
+                        }
+                    }
+
+
+                    var i = iterate;
+
+                    $('#add').click(function () {
+                        $('<input id="fieldValue' + i + '" class="form-control text-right fieldValue" placeholder="مقدار" type="number" value="" name="dynamic[]">').fadeIn('slow').appendTo('.inputs .row #valueContainer');
+                        $('<input id="fieldName' + i + '" class="form-control text-right fieldName" placeholder="نام" type="text" value="" name="dynamic[]">').fadeIn('slow').appendTo('.inputs .row #nameContainer');
+
+                        i++;
+                    });
+
+                    $('#remove').click(function () {
+                        if (i > 1) {
+                            $('.inputs .row #nameContainer .fieldName:last').remove();
+                            $('.inputs .row #valueContainer .fieldValue:last').remove();
+                            i--;
+                        }
+                    });
+
+                    $('.submit').click(function () {
+
+                        var item = [];
+                        var data = {
+                            items: [
+            { id: "", name: "", type: "" }
+                            ]
+                        };
+                        for (j = 0; j < i; j++) {
+                            var id = j;
+                            var name = $("#fieldName" + j).val();
+                            var type = $("#fieldValue" + j).val();
+                            // Create the item using the values
+                            var item = { id: id, name: name, type: type };
+                            // Add the item to the array
+                            data.items.push(item);
+                        }
+
+                        data.items.shift();
+                        console.log(data);
+                        document.getElementById("Options").value = JSON.stringify(data);
+
+                        //alert(options);
+                        return false;
+                    });
+
+                });
+            </script>
+
+
             <script>
 
                 $('#EffectivePrice').change(

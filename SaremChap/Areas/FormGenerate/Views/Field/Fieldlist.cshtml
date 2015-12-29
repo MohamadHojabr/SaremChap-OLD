@@ -13,32 +13,23 @@
 </p>
 <table class="table table-striped" style="direction:rtl">
     <tr>
-        <th>
+        <th class="text-center">
             @Html.DisplayNameFor(model => model.Form.Fa_Title)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TitleEn)
+        <th class="text-center">
+            نوع فیلد
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TitleFa)
+        <th class="text-center">
+            عنوان انگلیسی فیلد
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RequiredField)
+        <th class="text-center">
+           عنوان فارسی فیلد
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DisabledField)
+        <th class="text-center">
+            فیلد اجباری
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EffectivePrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Options)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Finance)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FieldType)
+        <th class="text-center">
+           فیلد غیر فعال
         </th>
         <th></th>
     </tr>
@@ -50,29 +41,21 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Form.Fa_Title)
             </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.FieldType)
+            </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.TitleEn)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TitleFa)
             </td>
-            <td>
+            <td class="text-center">
                 @Html.DisplayFor(modelItem => item.RequiredField)
             </td>
-            <td>
+            <td class="text-center">
                 @Html.DisplayFor(modelItem => item.DisabledField)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EffectivePrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Options)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Finance)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FieldType)
             </td>
             <td>
                 <a class="jq-btn" data-url="/FormGenerate/field/Edit/@item.Id" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">اصلاح</a> |
