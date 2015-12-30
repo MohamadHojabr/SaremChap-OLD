@@ -306,8 +306,7 @@
 
 
                             <div class="col-md-6"></div>
-                            <div class="col-md-4" id="radioContainer" style="background:#e2e2e2; border-radius:3px; align-content:stretch">
-
+                            <div class="col-md-4" id="radioContainer[@i]" style="background:#e2e2e2; border-radius:3px; align-content:stretch">
                             </div>
                             <div class="col-md-2">
                                 <p class="text-right">@Model.ElementAt(i).TitleFa</p>
@@ -325,13 +324,20 @@
 
                             for (var i in storejson.items) {
                                 console.log(storejson.items[i].name);
-                                var option = "<label class=\"radio-inline\" style=\"float:right\"><input type=\"radio\" name=\"radioItem\" class='text-right' data-finance='" + storejson.items[i].type + "' value='" + storejson.items[i].name + "'/>" + storejson.items[i].name + "</label>";
-                                document.getElementById('radioContainer').innerHTML += option;
+                                var option = "<label class=\"radio-inline\" style=\"float:right\"><input type=\"radio\" name=\"radioItem[@i]\" onclick=\"radval(@i)\" class='text-right' data-finance='" + storejson.items[i].type + "' value='" + storejson.items[i].name + "'/>" + storejson.items[i].name + "</label>";
+                                document.getElementById('radioContainer[@i]').innerHTML += option;
                             }
 
                             var finance = 0;
 
-                            $('#radioContainer input').click(function () {
+                            function radval(id) {
+                                plusPrice = plusPrice - finance;
+                                finance = $('input[name=radioItem[' + id + ']]:checked').attr("data-finance");
+                                plusPrice = plusPrice + parseInt(finance);
+                                UpdatePrice();
+                            }
+
+                            $('#radioContainer[@i] input').click(function () {
                                 plusPrice = plusPrice - finance;
                                 finance = $('input[name=radioItem]:checked').attr("data-finance");
                                 plusPrice = plusPrice + parseInt(finance);
@@ -354,37 +360,51 @@
                             <input type="hidden" name="[@i].FormId" value="@Model.ElementAt(i).FormId" />
                             <div class="col-md-6"></div>
                             <div class="col-md-4">
-                                <select id="dropDown" name="[@i].TitleEn" class="form-control text-right" data-validetta="required">
-                                    <option value="0" name="[@i].TitleEn" class='text-right' data-finance='0'>--انتخاب کنید--</option>
+                                <select id="dropDown[@i]" onchange="calval(this.id)" name="[@i].TitleEn" class="form-control text-right" data-validetta="required">
+                                    <option value="0" class='text-right' data-finance='0'>--انتخاب کنید--</option>
                                 </select>
                             </div>
                             <label class="col-md-2 control-label text-right">@Model.ElementAt(i).TitleFa</label>
                         </div>
                         <hr />
                         <script>
+    storejson = getJSonObject("@Model.ElementAt(i).Options");
+    console.log(storejson)
+    function getJSonObject(value) {
+        return $.parseJSON(value.replace(/&quot;/ig, '"'));
+    }
 
-                            storejson = getJSonObject("@Model.ElementAt(i).Options");
-                            function getJSonObject(value) {
-                                return $.parseJSON(value.replace(/&quot;/ig, '"'));
-                            }
+    for (var i in storejson.items) {
 
-                            for (var i in storejson.items) {
-                                console.log(storejson.items[i].name);
-                                var option = "<option class='text-right' data-finance='" + storejson.items[i].type + "' value='" + storejson.items[i].name + "'>" + storejson.items[i].name + "</option>";
-                                document.getElementById('dropDown').innerHTML += option;
+        var option = "<option class='text-right' data-finance='" + storejson.items[i].type + "' value='" + storejson.items[i].name + "'>" + storejson.items[i].name + "</option>";
+        document.getElementById('dropDown[@i]').innerHTML += option;
+
                             }
 
                             var finance = 0;
 
-                            $('#dropDown option').click(function () {
-                                var x = document.getElementById("dropDown").selectedIndex;
-                                var y = document.getElementById("dropDown").options;
-                                plusPrice = plusPrice - finance;
-                                finance = y[x].getAttribute("data-finance");
-                                plusPrice = plusPrice + parseInt(finance);
-                                UpdatePrice();
-                                console.log("Index: " + y[x].index + " is " + y[x].text + "and finance is" + y[x].getAttribute("data-finance"));
-                            });
+                            function calval (id)
+                            {
+                                console.log("run");
+                                var x = document.getElementById(id).selectedIndex;
+                                var y = document.getElementById(id).options;
+        plusPrice = plusPrice - finance;
+        finance = y[x].getAttribute("data-finance");
+        plusPrice = plusPrice + parseInt(finance);
+        UpdatePrice();
+        console.log("Index: " + y[x].index + " is " + y[x].text + "and finance is" + y[x].getAttribute("data-finance"));
+    }
+
+    $('#dropDown[' +@i +'] option').click(function () {
+        console.log("run");
+        var x = document.getElementById("dropDown[@i]").selectedIndex;
+        var y = document.getElementById("dropDown[@i]").options;
+        plusPrice = plusPrice - finance;
+        finance = y[x].getAttribute("data-finance");
+        plusPrice = plusPrice + parseInt(finance);
+        UpdatePrice();
+        console.log("Index: " + y[x].index + " is " + y[x].text + "and finance is" + y[x].getAttribute("data-finance"));
+    });
 
 
                         </script>
