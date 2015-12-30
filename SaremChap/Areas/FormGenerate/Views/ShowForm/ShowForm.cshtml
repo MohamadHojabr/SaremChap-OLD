@@ -316,6 +316,8 @@
                         </div>
                         <hr />
                         <script>
+                            var tempPriceRadio = 0;
+                            var financeRadio = 0;
 
                             storejson = getJSonObject("@Model.ElementAt(i).Options");
                             function getJSonObject(value) {
@@ -324,25 +326,32 @@
 
                             for (var i in storejson.items) {
                                 console.log(storejson.items[i].name);
-                                var option = "<label class=\"radio-inline\" style=\"float:right\"><input type=\"radio\" name=\"radioItem[@i]\" onclick=\"radval(@i)\" class='text-right' data-finance='" + storejson.items[i].type + "' value='" + storejson.items[i].name + "'/>" + storejson.items[i].name + "</label>";
+                                var option = "<label class=\"radio-inline\" style=\"float:right\"><input type=\"radio\" name=\"radioItem_@i\" onclick=\"getFinanceRadio(@i)\" class='text-right' data-finance='" + storejson.items[i].type + "' value='" + storejson.items[i].name + "'/>" + storejson.items[i].name + "</label>";
                                 document.getElementById('radioContainer[@i]').innerHTML += option;
                             }
 
                             var finance = 0;
 
-                            function radval(id) {
-                                plusPrice = plusPrice - finance;
-                                finance = $('input[name=radioItem[' + id + ']]:checked').attr("data-finance");
-                                plusPrice = plusPrice + parseInt(finance);
-                                UpdatePrice();
+                            //function radval(id) {
+                            //    plusPrice = plusPrice - finance;
+                            //    finance = $('input[name=radioItem_' + id + ']:checked').attr("data-finance");
+                            //    plusPrice = plusPrice + parseInt(finance);
+                            //    UpdatePrice();
+                            //}
+
+                            function getFinanceRadio(id) {
+                                console.log("riu");
+                                moha = $('input[name=radioItem_' + id + ']:checked').attr("data-finance");
+                                financeRadio = parseInt(moha);
+                                var pre = tempPriceRadio + financeRadio;
+                                calculateThePriceRadio(pre);
+                                tempPriceRadio = -financeRadio;
                             }
 
-                            $('#radioContainer[@i] input').click(function () {
-                                plusPrice = plusPrice - finance;
-                                finance = $('input[name=radioItem]:checked').attr("data-finance");
-                                plusPrice = plusPrice + parseInt(finance);
+                            function calculateThePriceRadio(p) {
+                                plusPrice = (plusPrice + p);
                                 UpdatePrice();
-                            });
+                            }
 
 
                         </script>
@@ -360,7 +369,7 @@
                             <input type="hidden" name="[@i].FormId" value="@Model.ElementAt(i).FormId" />
                             <div class="col-md-6"></div>
                             <div class="col-md-4">
-                                <select id="dropDown[@i]" onchange="calval(this.id)" name="[@i].TitleEn" class="form-control text-right" data-validetta="required">
+                                <select id="dropDown[@i]" onchange="getFinance(this.id)" name="[@i].TitleEn" class="form-control text-right" data-validetta="required">
                                     <option value="0" class='text-right' data-finance='0'>--انتخاب کنید--</option>
                                 </select>
                             </div>
@@ -368,43 +377,34 @@
                         </div>
                         <hr />
                         <script>
-    storejson = getJSonObject("@Model.ElementAt(i).Options");
-    console.log(storejson)
-    function getJSonObject(value) {
-        return $.parseJSON(value.replace(/&quot;/ig, '"'));
-    }
+                            var tempPrice = 0;
+                            var finance = 0;
+                            storejson = getJSonObject("@Model.ElementAt(i).Options");
+                            console.log(storejson)
+                            function getJSonObject(value) {
+                                return $.parseJSON(value.replace(/&quot;/ig, '"'));
+                            }
 
-    for (var i in storejson.items) {
+                            for (var i in storejson.items) {
 
-        var option = "<option class='text-right' data-finance='" + storejson.items[i].type + "' value='" + storejson.items[i].name + "'>" + storejson.items[i].name + "</option>";
-        document.getElementById('dropDown[@i]').innerHTML += option;
+                                var option = "<option class='text-right' data-finance='" + storejson.items[i].type + "' value='" + storejson.items[i].name + "'>" + storejson.items[i].name + "</option>";
+                                document.getElementById('dropDown[@i]').innerHTML += option;
 
                             }
 
-                            var finance = 0;
-
-                            function calval (id)
-                            {
-                                console.log("run");
+                            function getFinance(id) {
                                 var x = document.getElementById(id).selectedIndex;
                                 var y = document.getElementById(id).options;
-        plusPrice = plusPrice - finance;
-        finance = y[x].getAttribute("data-finance");
-        plusPrice = plusPrice + parseInt(finance);
-        UpdatePrice();
-        console.log("Index: " + y[x].index + " is " + y[x].text + "and finance is" + y[x].getAttribute("data-finance"));
-    }
+                                finance = parseInt(y[x].getAttribute("data-finance"));
+                                var pre = tempPrice + finance;
+                                calculateThePrice(pre);
+                                tempPrice = -finance;
+                            }
 
-    $('#dropDown[' +@i +'] option').click(function () {
-        console.log("run");
-        var x = document.getElementById("dropDown[@i]").selectedIndex;
-        var y = document.getElementById("dropDown[@i]").options;
-        plusPrice = plusPrice - finance;
-        finance = y[x].getAttribute("data-finance");
-        plusPrice = plusPrice + parseInt(finance);
-        UpdatePrice();
-        console.log("Index: " + y[x].index + " is " + y[x].text + "and finance is" + y[x].getAttribute("data-finance"));
-    });
+                            function calculateThePrice(p) {
+                                plusPrice = (plusPrice + p);
+                                UpdatePrice();
+                            }
 
 
                         </script>
@@ -502,33 +502,34 @@
                     <div class="call-action call-action-boxed call-action-style3 clearfix">
                         <div class="row">
                             <div class="col-md-6">
-                                <h3 id="totalPrice" style="color:#ffffff">0</h3>
+                                <h3 id="totalPrice" style="color: #ffffff">0</h3>
                             </div>
                             <div class="col-md-6">
-                                <h3 style="color:#ffffff">هزینه سفارش</h3>
-                            </div>
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h3 id="shippingPrice" style="color:#ffffff">0</h3>
-                            </div>
-                            <div class="col-md-6">
-                                <h3 style="color:#ffffff">هزینه حمل و نقل</h3>
+                                <h3 style="color: #ffffff">هزینه سفارش</h3>
                             </div>
                         </div>
-                        <br />
+                        <br/>
                         <div class="row">
                             <div class="col-md-6">
-                                <h3 id="FinalPrice" style="color:#ffffff">0</h3>
+                                <h3 id="shippingPrice" style="color: #ffffff">0</h3>
                             </div>
                             <div class="col-md-6">
-                                <h3 style="color:#ffffff">جمع هزینه</h3>
+                                <h3 style="color: #ffffff">هزینه حمل و نقل</h3>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3 id="FinalPrice" style="color: #ffffff">0</h3>
+                            </div>
+                            <div class="col-md-6">
+                                <h3 style="color: #ffffff">جمع هزینه</h3>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <button class="btn-default" onclick="UpdatePrice()"> جمع </button>
             <br />
             <div class="form-group" data-formid="@ViewBag.FormId">
                 <div class="col-md-offset-2 col-md-10">
@@ -612,12 +613,12 @@
 
         $.ajax({
 
-            url: "/home/imageList",
-            contentType: 'application/html; charset=utf-8',
-            type: 'GET',
-            dataType: 'html'
+                url: "/home/imageList",
+                contentType: 'application/html; charset=utf-8',
+                type: 'GET',
+                dataType: 'html'
 
-        })
+            })
             .success(function (result) {
 
                 $('#imageList-container').html(result).fadeIn();
@@ -661,7 +662,7 @@
         }
 
         $.each($('.quantity'), function (index, value) {
-            var int = parseInt($(this).val())
+            var int = parseInt($(this).val());
             var sp = parseInt($(this).attr("data-val"));
             if (get_Number > int) {
 
@@ -682,10 +683,10 @@
     }
 
     function FinalPrice() {
-        var total = $('#totalPrice').text()
+        var total = $('#totalPrice').text();
         var final = parseInt(total) + parseInt(shippingPrice);
         $('#total_price').attr("value", final);
-        $('#FinalPrice').text(final)
+        $('#FinalPrice').text(final);
     }
 
 
