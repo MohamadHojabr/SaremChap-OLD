@@ -441,7 +441,8 @@
                             <div class="col-md-6"></div>
                             <div class="col-md-4">
                                 <select name="[@i].TitleEn" id="dropdownID" onchange="ShippingPrice()" class="form-control text-right" data-finance="@Model.ElementAt(i).Finance" data-validetta="required" style="direction: rtl">
-                                    <option value="15500">پست پیشتاز : برای شهرستان ( 1 عدد 15500 تومان و برای هر عدد اضافه 1200 تومان اضافه شود )</option>
+                                    <option value="0" class='text-right' data-finance='0'>--انتخاب کنید--</option>
+                                     <option value="15500">پست پیشتاز : برای شهرستان ( 1 عدد 15500 تومان و برای هر عدد اضافه 1200 تومان اضافه شود )</option>
                                     <option value="0">پیک : در تهران ( هزینه بصورت جدا گانه توسط پیک در محل از مشتری دریافت میشود )</option>
                                     <option value="0">باربری : برای شهرستان ( بصورت پس کرایه )</option>
                                     <option value="0">حضوری </option>
@@ -529,7 +530,6 @@
                     </div>
                 </div>
             </div>
-            <button class="btn-default" onclick="UpdatePrice()"> جمع </button>
             <br />
             <div class="form-group" data-formid="@ViewBag.FormId">
                 <div class="col-md-offset-2 col-md-10">

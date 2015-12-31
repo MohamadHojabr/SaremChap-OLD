@@ -190,7 +190,7 @@ namespace SaremChap.Areas.panel.Controllers
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 updateSiteMap updateSiteMap = new updateSiteMap();
-                updateSiteMap.UpdateSiteMap("http://www.saremchap.ir/View/Product/Service/" + product.ProductID, "add");
+                updateSiteMap.UpdateSiteMap("http://www.saremchap.ir/View/Product/Service/" + product.ProductID, "edit");
 
                 return RedirectToAction("Index");
             }

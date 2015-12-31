@@ -6,7 +6,6 @@
 
 @*<link href="~/Content/plugins/CSS3Lightbox/css/demo.css" rel="stylesheet" />*@
 <link href="~/Content/plugins/CSS3Lightbox/css/style3.css" rel="stylesheet" />
-<div class="init-page"></div>
 
 
 
@@ -48,13 +47,43 @@
 
         <li class="">
             <a href="#image-@image.GalleryItemId">
-                <img src=@image.url alt=@image.name>
+                @if (image.name == null)
+                {
+
+                    <img width="100" class="img-thumbnail" src="~/Content/images/image-not-found.jpg" alt="sarem chap | چاپ صارم " />
+                }
+                else
+                {
+
+
+                    var url = string.Format("/images/Services/gallery/{0}", image.FileName);
+                    <div>
+                        <img width="100" class="img-thumbnail" src=@url alt="@item.name" />
+                    </div>
+
+
+                }
                 <span>@image.name</span>
             </a>
             <div class="lb-overlay" id="image-@image.GalleryItemId" style="margin-top:50px">
                 <div class="row">
                     <div class="col-md-6">
-                        <img src=@image.url alt=@image.name />
+                        @if (image.name == null)
+                        {
+
+                            <img width="100" class="img-thumbnail" src="~/Content/images/image-not-found.jpg" alt="sarem chap | چاپ صارم " />
+                        }
+                        else
+                        {
+
+
+                            var url = string.Format("/images/Services/gallery/{0}", image.FileName);
+                            <div>
+                                <img width="100" class="img-thumbnail" src=@url alt="@item.name" />
+                            </div>
+
+
+                        }
 
                     </div>
                     <div class="col-md-6">
