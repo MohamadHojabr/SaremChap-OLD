@@ -343,9 +343,14 @@
                                 console.log("riu");
                                 moha = $('input[name=radioItem_' + id + ']:checked').attr("data-finance");
                                 financeRadio = parseInt(moha);
-                                var pre = tempPriceRadio + financeRadio;
-                                calculateThePriceRadio(pre);
-                                tempPriceRadio = -financeRadio;
+                                if (financeRadio === 0 || isNaN(financeRadio)) {
+                                    console.log("value is null");
+
+                                } else {
+                                    var pre = tempPriceRadio + financeRadio;
+                                    calculateThePriceRadio(pre);
+                                    tempPriceRadio = -financeRadio;
+                                }
                             }
 
                             function calculateThePriceRadio(p) {
@@ -380,7 +385,7 @@
                             var tempPrice = 0;
                             var finance = 0;
                             storejson = getJSonObject("@Model.ElementAt(i).Options");
-                            console.log(storejson)
+                            console.log(storejson);
                             function getJSonObject(value) {
                                 return $.parseJSON(value.replace(/&quot;/ig, '"'));
                             }
@@ -396,9 +401,14 @@
                                 var x = document.getElementById(id).selectedIndex;
                                 var y = document.getElementById(id).options;
                                 finance = parseInt(y[x].getAttribute("data-finance"));
-                                var pre = tempPrice + finance;
-                                calculateThePrice(pre);
-                                tempPrice = -finance;
+                                if (finance === 0 || isNaN(finance)) {
+                                    console.log("value is null");
+
+                                } else {
+                                    var pre = tempPrice + finance;
+                                    calculateThePrice(pre);
+                                    tempPrice = -finance;
+                                }
                             }
 
                             function calculateThePrice(p) {
@@ -673,8 +683,8 @@
         });
 
         console.log(plusPrice);
-        var sp = SinglePrice + plusPrice
-        $('#singlePrice').text(sp)
+        var sp = SinglePrice + plusPrice;
+        $('#singlePrice').text(sp);
         var total = sp * get_Number;
         $('#totalPrice').text(total);
 
