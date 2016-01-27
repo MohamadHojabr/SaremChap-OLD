@@ -50,7 +50,7 @@
                 @if (image.name == null)
                 {
 
-                    <img width="100" class="img-thumbnail" src="~/Content/images/image-not-found.jpg" alt="sarem chap | چاپ صارم " />
+                    <img class="img-thumbnail" src="~/Content/images/image-not-found.jpg" alt="sarem chap | چاپ صارم " />
                 }
                 else
                 {
@@ -71,7 +71,7 @@
                         @if (image.name == null)
                         {
 
-                            <img width="100" class="img-thumbnail" src="~/Content/images/image-not-found.jpg" alt="sarem chap | چاپ صارم " />
+                            <img class="img-thumbnail" src="~/Content/images/image-not-found.jpg" alt="sarem chap | چاپ صارم " />
                         }
                         else
                         {
@@ -79,7 +79,7 @@
 
                             var url = string.Format("/images/Services/gallery/{0}", image.FileName);
                             <div>
-                                <img width="100" class="img-thumbnail" src=@url alt="@item.name" />
+                                <img class="img-thumbnail" src=@url alt="@item.name" />
                             </div>
 
 

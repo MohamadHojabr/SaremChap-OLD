@@ -18,6 +18,7 @@ namespace SaremChap.Areas.view.Controllers
             var category = db.ProductCategories.FirstOrDefault(p => p.ProductCategoryID == id);
             ViewBag.formid = db.ProductCategories.Where(m => m.ProductCategoryID == id).Select(x => x.Product);
             ViewBag.datenow = DateTime.Now.ToString("yyyy-MM-dd");
+            ViewBag.RelatedProduct = db.ProductCategories.ToList();
             return View(category);
         }
 

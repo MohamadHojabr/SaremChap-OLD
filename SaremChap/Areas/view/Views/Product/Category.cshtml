@@ -38,19 +38,19 @@
     </div>
 </div>
 <br /><br />
-<div class="container" style="text-align:right">
+<div class="container" style="text-align: right">
     <div class="row">
         @foreach (var p in @Model.Product)
         {
             <div class="col-md-4">
-                <div class=" call-action call-action-boxed call-action-style1 clearfix" style="height: 350px; margin-bottom: 20px; overflow: hidden; padding: 10px 20px; ">
+                <div class=" call-action call-action-boxed call-action-style1 clearfix" style="height: 350px; margin-bottom: 20px; overflow: hidden; padding: 10px 20px;">
                     <div class="col-md-12">
-                        <h3 style="margin-bottom: 10px;direction: rtl">@Html.DisplayFor(modelItem => p.name)</h3>
+                        <h3 style="margin-bottom: 10px; direction: rtl">@Html.DisplayFor(modelItem => p.name)</h3>
 
                         @if (p.Files.Count == 0)
                         {
                             <a href="/View/Product/Service/@p.ProductID">
-                                <img class="img-thumbnail" src="~/Content/images/image-not-found.jpg" alt="sarem chap | چاپ صارم " />
+                                <img class="img-thumbnail" src="~/Content/images/image-not-found.jpg" alt="sarem chap | چاپ صارم "/>
                             </a>
                         }
                         else
@@ -61,14 +61,14 @@
                                 var url = string.Format("/images/Services/service/{0}", file.FileName);
                                 <a href="/View/Product/Service/@p.ProductID">
 
-                                    <img class="img-thumbnail" src=@url alt="@file.FileName" style="height: 250px" />
+                                    <img class="img-thumbnail" src=@url alt="@file.FileName" style="height: 250px"/>
 
                                 </a>
                             }
 
                         }
 
-                        <a href="/View/Product/Service/@p.ProductID" class="btn-system border-btn btn-large btn-purple" style="margin-top: 10px; text-align: center; width: 100%;">  مشاهده جزئیات  <i class="fa fa-eye"></i> </a>
+                        <a href="/View/Product/Service/@p.ProductID" class="btn-system border-btn btn-large btn-purple" style="margin-top: 10px; text-align: center; width: 100%;"> مشاهده جزئیات <i class="fa fa-eye"></i> </a>
                     </div>
                 </div>
             </div>
@@ -77,6 +77,58 @@
 
     </div>
 </div>
+
+<div class="project">
+    <div class="container">
+        <!-- Start Recent Projects Carousel -->
+        <div class="recent-projects">
+            <h4 class="title" style="text-align: right; direction: rtl; margin-right: 80px"><span> خدمات دیگر چاپ صارم .... </span></h4>
+            <div id="relatedCarousel" class="projects-carousel touch-carousel">
+
+                @foreach (var p in ViewBag.RelatedProduct)
+                {
+                    <div class="portfolio-item item">
+                        <div class="portfolio-border">
+                            <div class="portfolio-thumb">
+                                <a href="/View/Product/Category/@p.ProductCategoryID">
+                                    <div class="thumb-overlay"><i class="fa fa-link"></i></div>
+                                    @if (p.ProductCategoryFileses.Count == 0)
+                                    {
+
+                                        <img class="lazyOwl" data-src="/Content/images/image-not-found.jpg" alt="sarem chap | چاپ صارم " />
+                                    }
+                                    else
+                                    {
+                                        foreach (var file in p.ProductCategoryFileses)
+                                        {
+                                            var url = string.Format("/images/Services/service/{0}", file.FileName);
+                                            <div>
+                                                <img class="lazyOwl" data-src="@url" alt="@file.FileName">
+                                            </div>
+                                        }
+
+                                    }
+
+                                </a>
+                            </div>
+                            <div class="portfolio-details">
+                                <a href="/View/Product/Category/@p.ProductCategoryID">
+                                    <h4 class="text-right direction-right">@p.name</h4>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+
+            </div>
+        </div>
+        <!-- End Recent Projects Carousel -->
+    </div><!-- .container -->
+</div>
+<br/>
+
 @section TagMeta{
 
     @Model.Tags

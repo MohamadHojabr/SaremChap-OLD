@@ -4,8 +4,19 @@
     ViewBag.Title = Model.name;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="row" style="background: #f5f5f5">
 
+    <div class="container text-right direction-right">
+        <ol class="breadcrumb">
 
+            <li><a href="/">صفحه اصلی</a></li>
+            <li><a href="/view/Product/Category/@Model.ProductCategory.ProductCategoryID">@Model.ProductCategory.name</a></li>
+            <li class="active">@Model.name</li>
+
+        </ol>
+    </div>
+
+</div>
 <div class="container">
     <br />
     <h1 class="text-right direction-right">@Model.name</h1>

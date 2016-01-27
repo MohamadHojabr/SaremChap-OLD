@@ -161,7 +161,13 @@ namespace SaremChap.Areas.panel.Controllers
         {
             if (ModelState.IsValid)
             {
-                var file = db.Files.FirstOrDefault(p => p.ProductId == product.ProductID);
+                if (upload == null)
+                {
+                    db.Files = db.Files;
+                }
+                else
+                {
+                    var file = db.Files.FirstOrDefault(p => p.ProductId == product.ProductID);
                 if (file != null)
                 {
                     db.Files.Remove(file);
@@ -186,6 +192,9 @@ namespace SaremChap.Areas.panel.Controllers
                     db.Files.Add(photo);
                     upload.SaveAs(path);
                 }
+                    
+                }
+                
                 
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();

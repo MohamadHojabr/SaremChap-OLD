@@ -26,7 +26,7 @@ namespace SaremChap.Areas.PartialsView.Controllers
         [ChildActionOnly]
         public ActionResult purchaseSection()
         {
-            var subjects = db.Subjects.FirstOrDefault(x => x.Status == Status.Special);
+            var subjects = db.Subjects.Where(x => x.Status == Status.Special).OrderByDescending(s=>s.SubjectDate).FirstOrDefault();
             return PartialView("purchaseSection", subjects);
         }
 
