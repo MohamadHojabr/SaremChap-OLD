@@ -101,9 +101,9 @@
                                     {
                                         foreach (var file in p.ProductCategoryFileses)
                                         {
-                                            var url = string.Format("/images/Services/service/{0}", file.FileName);
+                                            var url = string.Format("/images/Services/productCategory/{0}", file.FileName);
                                             <div>
-                                                <img class="lazyOwl" data-src="/images/Services/productCategory/@url" alt="@file.FileName">
+                                                <img class="lazyOwl" data-src="@url" alt="@file.FileName">
                                             </div>
                                         }
 
