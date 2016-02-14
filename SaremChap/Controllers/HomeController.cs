@@ -65,6 +65,11 @@ namespace SaremChap.Controllers
            
             return View();
         }
+        public ActionResult HowToOrder()
+        {
+           
+            return View();
+        }
 
         public ActionResult uploadManager()
         {

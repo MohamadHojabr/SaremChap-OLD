@@ -148,7 +148,7 @@
                                     <a href="/Home/Accountnumber">شماره حساب</a>
                                 </li>
                                 <li>
-                                    <a href="#">نحوه ثبت سفارش</a>
+                                    <a href="/Home/HowToOrder">نحوه ثبت سفارش</a>
                                 </li>
                                 <li>
                                     <a href="/Home/Rules">قوانین ارجاع و تعویض</a>
@@ -161,7 +161,20 @@
                         </li>
                         <li>
                             <a href="#">گالری</a>
-                            @{Html.RenderAction("GalleriesInMenu", "Partials", new { Area = "PartialsView" });}
+                            <ul class="dropdown">
+                                <li class="productMenu">
+                                    <h3 style="padding:7px">  گالری تصاویر    <i class="fa fa-file-image-o"></i></h3>
+
+                                    <div class="row" style="width:600px">
+
+                                        @{Html.RenderAction("GalleriesInMenu", "Partials", new { Area = "PartialsView" });}
+
+
+                                    </div>
+
+                                </li>
+                            </ul>
+
                         </li>
                         <li>
                             <a href="#">مطالب</a>

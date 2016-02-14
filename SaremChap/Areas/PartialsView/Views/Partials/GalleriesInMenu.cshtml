@@ -1,14 +1,12 @@
 ﻿@model IEnumerable<Domainclasses.Modes.Gallery>
 
-<ul class="dropdown">
     @foreach (var item in Model)
     {
-        <li>
+        <div class="col-md-4">
             <a href="/home/selectgallery/@item.GalleryId">
                 @item.name
             </a>
-        </li>
+        </div>
     }
-</ul>
 
 
