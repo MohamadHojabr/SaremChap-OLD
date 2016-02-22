@@ -76,6 +76,12 @@ namespace SaremChap.Controllers
             return View();
         }
 
+        public ActionResult Notification(string str)
+        {
+            ViewBag.notyfi = str;
+            return View();
+        }
+
         public ActionResult imageList(int? imageid)
         {
             if (imageid.HasValue)

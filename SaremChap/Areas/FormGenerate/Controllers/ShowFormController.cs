@@ -20,8 +20,9 @@ namespace SaremChap.Areas.FormGenerate.Controllers
             var formid = db.Forms.Where(x => x.Product_ID == id).Select(x => x.Id).Single();
 
             var field = db.Fields.Where(x => x.FormId == formid);
-            
-            ViewBag.FormId = id;
+            if (field.Any())
+            {
+                ViewBag.FormId = id;
             var pricelist = db.Forms.Find(formid).Product.Price;
             ViewBag.PriceList = pricelist;
             var relatedProduct = db.Forms.Find(formid).Product;
@@ -30,6 +31,8 @@ namespace SaremChap.Areas.FormGenerate.Controllers
             ViewBag.form = form;
 
             return View(field);
+            }
+            return Redirect("/Home/Notification/لبلی");
         }
 
 
