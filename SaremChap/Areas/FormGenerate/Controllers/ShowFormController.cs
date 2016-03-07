@@ -111,11 +111,12 @@ namespace SaremChap.Areas.FormGenerate.Controllers
 
         public ActionResult OrderList(int? page, string sortOrder, string currentFilter, string searchString,string submitid)
         {
-            var list = from s in db.Orders
+            var list = from s in db.Orders.OrderByDescending(x=>x.OrderDate)
                            select s;
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            //sortOrder = "date_desc";
+            //ViewBag.CurrentSort = sortOrder;
+            //ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            //ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
             if (searchString != null)
             {
                 page = 1;
@@ -137,21 +138,21 @@ namespace SaremChap.Areas.FormGenerate.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    list = list.OrderByDescending(s => s.LastName);
-                    break;
-                case "Date":
-                    list = list.OrderBy(s => s.OrderDate);
-                    break;
-                case "date_desc":
-                    list = list.OrderByDescending(s => s.SubmitFormId);
-                    break;
-                default:  // Name ascending 
-                    list = list.OrderBy(s => s.LastName);
-                    break;
-            }
+            //switch (sortOrder)
+            //{
+            //    case "name_desc":
+            //        list = list.OrderByDescending(s => s.LastName);
+            //        break;
+            //    case "Date":
+            //        list = list.OrderBy(s => s.OrderDate);
+            //        break;
+            //    case "date_desc":
+            //        list = list.OrderByDescending(s => s.SubmitFormId);
+            //        break;
+            //    default:  // Name ascending 
+            //        list = list.OrderBy(s => s.LastName);
+            //        break;
+            //}
 
             if (!String.IsNullOrEmpty(searchString))
             {

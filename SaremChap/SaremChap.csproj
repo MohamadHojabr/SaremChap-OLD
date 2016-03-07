@@ -889,6 +889,7 @@
     <Content Include="Views\Shared\_PrintLayout.cshtml" />
     <Content Include="Views\Home\HowToOrder.cshtml" />
     <Content Include="Views\Home\Notification.cshtml" />
+    <Content Include="Views\Home\Payment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

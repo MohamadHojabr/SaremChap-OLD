@@ -123,6 +123,10 @@
                     <!-- Start Navigation List -->
                     <ul class="nav navbar-nav navbar-right">
                         <li>
+                            <a href="/home/Payment">پرداخت سریع</a>
+                        </li>
+
+                        <li>
                             <a href="/home/Contact">ارتباط با ما</a>
                             <!--<ul class="dropdown">
                                 <li>
@@ -173,11 +177,12 @@
                             <a href="#">گالری</a>
                             <ul class="dropdown">
                                 <li class="productMenu">
-                                    <h3 style="padding:7px">  گالری تصاویر    <i class="fa fa-file-image-o"></i></h3>
+                                    <h3 style="padding: 7px"> گالری تصاویر <i class="fa fa-file-image-o"></i>
+                                    </h3>
 
-                                    <div class="row" style="width:600px">
+                                    <div class="row" style="width: 600px">
 
-                                        @{Html.RenderAction("GalleriesInMenu", "Partials", new { Area = "PartialsView" });}
+                                        @{Html.RenderAction("GalleriesInMenu", "Partials", new {Area = "PartialsView"});}
 
 
                                     </div>
@@ -188,18 +193,19 @@
                         </li>
                         <li>
                             <a href="#">مطالب</a>
-                            @{Html.RenderAction("ChapterInMenu", "Partials", new { Area = "PartialsView" });}
+                            @{Html.RenderAction("ChapterInMenu", "Partials", new {Area = "PartialsView"});}
 
                         </li>
                         <li>
                             <a href="#">خدمات</a>
                             <ul class="dropdown">
                                 <li class="productMenu">
-                                    <h3 style="padding:7px">  لیست کامل خدمات و محصولات چاپ صارم    <i class="fa fa-cog fa-spin"></i></h3>
+                                    <h3 style="padding: 7px"> لیست کامل خدمات و محصولات چاپ صارم <i class="fa fa-cog fa-spin"></i>
+                                    </h3>
 
-                                    <div class="row" style="width:880px">
+                                    <div class="row" style="width: 880px">
 
-                                        @{Html.RenderAction("ProductInMenu", "Partials", new { Area = "PartialsView" });}
+                                        @{Html.RenderAction("ProductInMenu", "Partials", new {Area = "PartialsView"});}
 
                                     </div>
 
@@ -290,43 +296,32 @@
                         <h4>چاپ صارم<span class="head-line"></span></h4>
                         
                         @*<form id="TransactionForm" method="post" action="http://merchant.parspal.com/postservice/">
-                            <input id="MerchantID" type="hidden" value="3180502" name="MerchantID">
-                            <input id="Password" type="hidden" value="nkKWnnhat" name="Password">
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td>مبلغ :</td>
-                                        <td>
-                                            <input class="submitpay" type="text" name="Price" dir="ltr">
-                                            تومان
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>نام :</td>
-                                        <td>
-                                            <input class="submitpay" type="text" name="Paymenter">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>ایمیل :</td>
-                                        <td>
-                                            <input class="submitpay" type="text" name="Email" dir="ltr">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>تلفن :</td>
-                                        <td>
-                                            <input class="submitpay" type="text" name="Mobile" dir="ltr">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td> </td>
-                                        <td>
-                                            <input class="submitclick" type="submit" value="اتصال به درگاه پرداخت">
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <input id="MerchantID" type="hidden" value="4272602" name="MerchantID">
+                            <input id="Password" class="text-right" type="hidden" value="d4mmxqgHW" name="Password">
+                            <div class="form-group">
+                                <p class="text-right" style="color: #f4f4f4"> مبلغ بر اساس تومان</p>
+                                <input class="form-control" type="text" name="Price" dir="ltr">
+                            </div>
+                            <div class="form-group">
+                                <p class="text-right direction-right" style="color: #f4f4f4">نام :</p>
+                                <input class="form-control" type="text" name="Paymenter">
+                            </div>
+
+                            <div class="form-group">
+                                <p class="text-right direction-right" style="color: #f4f4f4">ایمیل :</p>
+                                <input class="form-control" type="text" name="Email" dir="ltr">
+
+                            </div>
+
+                            <div class="form-group">
+                                <p class="text-right direction-right" style="color: #f4f4f4">تلفن :</p>
+                                <input class="form-control" type="text" name="Mobile" dir="ltr">
+                            </div>
+
+                            <div class="form-group">
+                                <input class="form-control" type="submit" value="اتصال به درگاه پرداخت">
+                            </div>
+                                                                                                                     
                             <input id="ResNumber" type="hidden" value="0" name="ResNumber">
                             <input id="Description" type="hidden" value="خرید" name="Description">
                             <input id="ReturnPath" type="hidden" value="http://www.yourweblogpath.com/" name="ReturnPath">

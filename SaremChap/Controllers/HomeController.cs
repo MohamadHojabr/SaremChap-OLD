@@ -65,6 +65,13 @@ namespace SaremChap.Controllers
            
             return View();
         }
+
+        public ActionResult Payment()
+        {
+           
+            return View();
+        }
+
         public ActionResult HowToOrder()
         {
            

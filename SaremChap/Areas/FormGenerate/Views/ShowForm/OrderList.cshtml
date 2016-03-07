@@ -98,4 +98,4 @@
 صفحه @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) از @Model.PageCount
 
 @Html.PagedListPager(Model, page => Url.Action("OrderList",
-    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    new { page, sortOrder = "date_desc", currentFilter = ViewBag.CurrentFilter }))

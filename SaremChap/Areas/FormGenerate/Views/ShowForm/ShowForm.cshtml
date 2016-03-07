@@ -575,11 +575,10 @@
 
                 this.on("success", function (file, Message) {
                     var img_holder = "/Images/WallImages/OrderImage/";
-                    var img_name = file.name;
-                    var img_url = img_holder + img_name;
+                    var img_url = img_holder + fileName;
                     $("#img-url").attr("value", img_url);
 
-                    console.log($("#img-url").val() + Message);
+                    console.log($("#img-url").val() + fileName);
                 });
 
                 this.on("removedfile", function (file) {

@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewBag.Title = "پرداخت سریع";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-banner" style="padding:40px 0; background: url(../Content/images/slide-02-bg.jpg) center #f9f9f9;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <ul class="breadcrumbs" style="width:100%; text-align:right">
+                    <li>پرداخت سریع</li>
+                    <li><a href="/">صفحه اصلی</a></li>
+                </ul>
+            </div>
+            <div class="col-md-6" style="text-align:right">
+                <h2>پرداخت سریع</h2>
+                <p>چاپ صارم</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container" style="text-align:right; margin-top:30px;margin-bottom:30px">
+
+    <div class="row">
+
+        <div class="col-md-4 pricing-tables">
+
+            <!-- Classic Heading -->
+
+
+            <div class="pricing-table">
+                <div class="container">
+                    <form id="TransactionForm" method="post" action="http://merchant.parspal.com/postservice/">
+                        <input id="MerchantID" type="hidden" value="4272602" name="MerchantID">
+                        <input id="Password" class="text-right" type="hidden" value="d4mmxqgHW" name="Password">
+                        <div class="form-group">
+                            <p class="text-right"> مبلغ بر اساس تومان</p>
+                            <input class="form-control" type="text" name="Price" dir="ltr">
+                        </div>
+                        <div class="form-group">
+                            <p class="text-right direction-right">نام :</p>
+                            <input class="form-control" type="text" name="Paymenter">
+                        </div>
+
+                        <div class="form-group">
+                            <p class="text-right direction-right">ایمیل :</p>
+                            <input class="form-control" type="text" name="Email" dir="ltr">
+
+                        </div>
+
+                        <div class="form-group">
+                            <p class="text-right direction-right">تلفن :</p>
+                            <input class="form-control" type="text" name="Mobile" dir="ltr">
+                        </div>
+
+                        <div class="form-group">
+                            <input class="form-control" type="submit" value="اتصال به درگاه پرداخت">
+                        </div>
+
+                        <input id="ResNumber" type="hidden" value="0" name="ResNumber">
+                        <input id="Description" type="hidden" value="خرید" name="Description">
+                        <input id="ReturnPath" type="hidden" value="http://www.yourweblogpath.com/" name="ReturnPath">
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-8">
+
+            <!-- Classic Heading -->
+            <h4 class="classic-title"><span>پرداخت سریع</span></h4>
+
+            <p>
+شما با امکان این صفحه میتوانید به راحتی به صورت آنلاین هزینه سفارش خود را پرداخت نمایید            </p>
+
+
+            <img class="img-thumbnail" src="~/Content/images/parent-child-support.jpg" />
+        </div>
+
+
+    </div>
+
+</div>
+@section TagMeta{
+
+
+    چاپ صارم چاپ روی انواع سطوح
+
+
+
+}
+
+@section ContentMeta{
+
+    چاپ صارم چاپ روی انواع سطوح
+
+}
+
+@section AuthorMeta{
+    گروه صنعتی چاپ صارم ارائه دهنده خدمات نوین چاپ
+}
+
+
